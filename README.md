@@ -6,6 +6,9 @@ Projects:
 
 - [jar-lid fly trap](projects/flytrap.scad)
 - [aquaponics siphon](projects/siphon.scad)
+- some [ShopVac](https://www.printables.com/model/461256-shopvac-50mm-camlock-connectors-with-magnetic-catc) adaptors:
+  - [extension (male-male adaptor)](projects/shopvac/extension.scad)
+  - [tube adaptor](projects/shopvac/tube_adaptor.scad)
 
 ## Dependencies
 
