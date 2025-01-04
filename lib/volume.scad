@@ -1,0 +1,2 @@
+TINY = 0.001;
+TOLERANCE = 0.1;
