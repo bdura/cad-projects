@@ -10,6 +10,9 @@ Projects:
   - [extension (male-male adaptor)](projects/shopvac/extension.scad)
   - [tube adaptor](projects/shopvac/tube_adaptor.scad)
 - a [cyclone](projects/shopvac/cyclone/cyclone.scad) to remove dust ahead of a shopvac bac
+- an [half-open cable chain](projects/cable-chain/chain.scad), a simple modification on
+  [the cable chain project on Printables](https://www.printables.com/model/314922-printable-cable-chain)
+  to make it half-open and allow adding it to a plug.
 
 ## Dependencies
 
