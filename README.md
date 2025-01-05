@@ -21,3 +21,15 @@ Some of these projects use the following dependencies:
 I personally just `git clone` the relevant project in OpenSCAD's well-known library directory
 (`$HOME/Documents/OpenSCAD/libraries` on macOS, `$HOME/.local/share/OpenSCAD/libraries` on Linux)
 and call it a day. I checked out the latest release for Round-Anything for good measure.
+
+## Learning OpenSCAD
+
+For all its issues, OpenSCAD is still a powerful tool that is not too hard to use.
+There are some good resources out there to help you:
+
+- the [OpenSCAD cheatsheet](https://openscad.org/cheatsheet/) can be very handy, and links
+  to the full documentation if need be
+- the [CadHub blog](https://learn.cadhub.xyz/docs/definitive-beginners/your-openscad-journey)
+  offers a very good introduction
+- [Mastering OpenSCAD](https://mastering-openscad.eu/buch/) is an incredibly thourough resource
+  for learning to use OpenSCAD the right way through a set of projects of increasing complexity
