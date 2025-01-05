@@ -33,3 +33,11 @@ There are some good resources out there to help you:
   offers a very good introduction
 - [Mastering OpenSCAD](https://mastering-openscad.eu/buch/) is an incredibly thourough resource
   for learning to use OpenSCAD the right way through a set of projects of increasing complexity
+
+## Some ready-to-print projects
+
+Some great entries on [Printables](https://www.printables.com):
+
+- [ShopVac](https://www.printables.com/model/461256-shopvac-50mm-camlock-connectors-with-magnetic-catc)
+- [Umikot - a planetary gear spirograph for espresso](https://www.printables.com/model/569582-umikot-54mm-version-planetary-gear-spirograph-espr)
+- [Cable chain](https://www.printables.com/model/314922-printable-cable-chain)
