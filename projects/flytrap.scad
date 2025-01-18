@@ -18,7 +18,7 @@ jar_width = 2;
 // Cap dimensions.
 cap_inner_diameter = jar_diameter + 2 * jar_threading_depth;
 cap_width = 2;
-cap_height = 13;
+cap_height = 11;
 cap_top_width = jar_threading_depth + jar_width + 1;
 cap_top_wall = 1.5;
 
@@ -28,7 +28,7 @@ thread_depth = 1.5;
 
 // Cone
 cone_height = 40;
-cone_opening_diameter = 5;
+cone_opening_diameter = 10;
 
 // Perforations
 cone_hole_height = 0.7;
@@ -43,20 +43,13 @@ module cap() {
   linear_extrude(cap_height)
     ring(inner, outer);
 
-  threading_height = cap_height - thread_pitch;
+  translate([0, 0, cap_height - wall])
+  linear_extrude(wall)
+    difference() {
+      circle(outer);
+      square(2 * (inner - thread_depth - TOLERANCE), center=true);
+    };
 
-  starts = 4;
-
-  translate(v = [0, 0, wall + cap_height / 2]) 
-    thread_helix(
-      d=(inner - thread_depth + TINY) * 2,
-      turns=(cap_height - 1.5 * wall - thread_pitch) / thread_pitch / starts,
-      pitch=thread_pitch,
-      starts=starts,
-      thread_depth=thread_depth,
-      internal=true,
-      lead_in=2
-    );
 
   linear_extrude(cap_top_wall)
     ring(inner - cap_top_width, outer);
