@@ -1,0 +1,31 @@
+name: STL build
+
+on:
+  # Triggers the workflow on push or pull request events but only for the master branch
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+  # Allows you to run this workflow manually from the Actions tab
+  workflow_dispatch:
+
+jobs:
+  stl_build:
+    runs-on: ubuntu-latest
+    name: Build STL
+    steps:
+      # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
+      - uses: actions/checkout@v4
+
+      - name: OpenSCAD STL
+        id: openscad-rpi3-top
+        uses: pkoehlers/openscad-Build-action@v1
+        with:
+          input-file: 'projects/shopvac/extension.scad'
+          output-file: 'extension.stl'
+      - name: Archive stl outputs
+        uses: actions/upload-artifact@v4
+        with:
+          name: stl
+          path: |
+            extension.stl
