@@ -14,15 +14,14 @@ jobs:
     runs-on: ubuntu-latest
     name: Build STL
     steps:
-      # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
       - uses: actions/checkout@v4
 
       - name: OpenSCAD STL
-        id: openscad-rpi3-top
-        uses: pkoehlers/openscad-Build-action@v1
+        uses: flat35hd99/openscad-actions@v1.3
         with:
-          input-file: 'projects/shopvac/extension.scad'
-          output-file: 'extension.stl'
+          scad_file: projects/shopvac/extension.scad
+          output_file: extension.stl
+
       - name: Archive stl outputs
         uses: actions/upload-artifact@v4
         with:
