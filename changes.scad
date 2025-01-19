@@ -1,31 +1,25 @@
 mode = "additions";
-
-module main() {
-  import(file = "main.stl");
-}
-
-module feat() {
-  import(file = "feat.stl");
-}
+new = ".artefacts/new.stl";
+old = ".artefacts/old.stl";
 
 module additions() {
   difference() {
-    feat();
-    main();
+    import(file = new);
+    import(file = old);
   }
 }
 
 module deletions() {
   difference() {
-    main();
-    feat();
+    import(file = old);
+    import(file = new);
   }
 }
 
 module common() {
   intersection() {
-    main();
-    feat();
+    import(file = old);
+    import(file = new);
   }
 }
 
