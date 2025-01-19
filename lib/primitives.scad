@@ -40,8 +40,6 @@ module arc(r, theta) {
     n = floor(theta / 30);
     remainder = theta % 30;
 
-    echo(n, remainder);
-
     union() {
         if (remainder > 0) {
             arc_primitive(r, remainder);
