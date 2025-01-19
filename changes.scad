@@ -37,4 +37,5 @@ module main(m = "all") {
   }
 }
 
+$vpr = [60, 0, 360 * $t];
 main(mode);
