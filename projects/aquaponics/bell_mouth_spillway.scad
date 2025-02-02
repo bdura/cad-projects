@@ -40,11 +40,11 @@ outer_anchor = 10;
 crest_height = 50;
 
 // Perforations
-perforation_n = 20;
-perforation_ratio = 0.3;
+perforation_n = 16;
+perforation_ratio = 0.4;
 
-perforation_height = 3;
-perforation_offset = 4;
+perforation_height = 2;
+perforation_offset = 3;
 
 module perforations() {
   n = perforation_n;
