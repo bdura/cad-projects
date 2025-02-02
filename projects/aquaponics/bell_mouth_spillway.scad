@@ -23,6 +23,11 @@ wall = 1;
 
 // Outlet
 outlet_diameter = 20;
+outlet_wall = 3;
+outlet_bend_radius = 15;
+outlet_hlength = 20;
+outlet_vlength = 5;
+outlet_mouth_width = 10;
 
 // Envelope
 envelope_top_radius = 45;
@@ -199,5 +204,54 @@ module main() {
   quarter_sphere();
 }
 
+module pipe_mouth_sketch() {
+  r = outlet_diameter / 2;
+  mw = outlet_mouth_width;
+  w = outlet_wall;
 
-main();
+  polygon([
+    [r, 0],
+    [r + mw, 0],
+    [r + mw, w],
+    [r, mw],
+  ]);
+}
+
+module pipe_sketch(w) {
+  difference() {
+    circle(d=outlet_diameter + w);
+    circle(d=outlet_diameter);
+  }
+}
+
+module pipe() {
+  r = outlet_bend_radius;
+  h = outlet_hlength;
+  v = outlet_vlength;
+
+  rotate([0, 90, 0])
+  rotate_extrude()
+  pipe_mouth_sketch();
+
+  translate([h, 0, 0]) {
+    translate([TINY, 0, 0])
+    rotate([0, -90, 0])
+    linear_extrude(h)
+    pipe_sketch(outlet_wall);
+
+    translate([r, 0, -v -r + TINY])
+    linear_extrude(v)
+    pipe_sketch(outlet_wall);
+
+    rotate([90, 0, 0])
+    translate([0, -r])
+    rotate_extrude(90)
+    translate([r, 0])
+    pipe_sketch(outlet_wall);
+  }
+}
+
+//main();
+
+rotate([0, 0, -90])
+pipe();
