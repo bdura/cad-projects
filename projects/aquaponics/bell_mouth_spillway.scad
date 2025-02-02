@@ -8,131 +8,92 @@ include <../../lib/constants.scad>
 
 $fn = 360;
 
+// Box dimensions
+spill_to_top = 74.3;
+buldge_to_top = 18.2;
+buldge_depth = 5;
+handle_width = 123.7;
+
+box_width = 280;
+box_height = 210;
+box_length = 365;
+
 // Wall size
 wall = 1;
 
+// Outlet
+outlet_diameter = 20;
+
 // Envelope
-envelope_top_radius = 50;
+envelope_top_radius = 90;
 envelope_bottom_radius = 10;
 envelope_height = 90;
 
+assert(2 * envelope_bottom_radius >= outlet_diameter);
+
+// Anchors
+side_anchor = 10;
+
 // Crest
-crest_height = 15;
+crest_height = 30;
 
-// Outlet
-outlet_diameter = 15;
+// Perforations
+perforation_n = 20;
+perforation_ratio = 0.3;
 
-fs = 0.5;
+perforation_height = 3;
+perforation_offset = 4;
 
-function sinh(x) = (exp(x) - exp(-x)) / 2;
+module perforations() {
+  n = perforation_n;
+  r = perforation_ratio;
 
-function dist(a, b) = len(a)==2?
-sqrt(                 // two dimensions
-    (a[0]-b[0])^2
-    +(a[1]-b[1])^2
-    ):
-sqrt(                 // three dimensions
-    (a[0]-b[0])^2
-    +(a[1]-b[1])^2
-    +(a[2]-b[2])^2
-    );
+  h = perforation_height;
+  o = perforation_offset;
 
-// length of curve
-  function length(pts) = [
-    // three control points
-    if (len(pts) == 3)
-        0.43 * dist(pts[0], pts[1])
-      + 0.53 * dist(pts[0], pts[2])
-      + 0.43 * dist(pts[1], pts[2])
-    // four control points
-    else if (len(pts) == 4)
-        0.35 * dist(pts[0], pts[1])
-      + 0.40 * dist(pts[0], pts[2])
-      + 0.23 * dist(pts[0], pts[3])
-      - 0.09 * dist(pts[1], pts[2])
-      + 0.40 * dist(pts[1], pts[2])
-    // five control points
-    else if (len(pts) == 5)
-        0.32 * dist(pts[0], pts[1])
-      + 0.35 * dist(pts[0], pts[2])
-      + 0.23 * dist(pts[0], pts[3])
-      + 0.10 * dist(pts[0], pts[4])
-      - 0.13 * dist(pts[1], pts[2])
-      + 0.20 * dist(pts[1], pts[3])
-      + 0.23 * dist(pts[1], pts[4])
-      - 0.13 * dist(pts[2], pts[3])
-      + 0.35 * dist(pts[2], pts[4])
-      + 0.32 * dist(pts[3], pts[4])
-    else
-        echo("Wrong number of points")]
-  [0];       // makes list into number
-// calculate singular points
-function b_pts(pts, fn, idx) =
-  // has pts more than two points?
-  len(pts) > 2 ?
-  // it calls itself in smaller portions
-    b_pts([for(i=[0:len(pts)-2])
-        pts[i]], fn, idx) * fn*idx
-      + b_pts([for(i=[1:len(pts)-1])
-        pts[i]], fn, idx) * (1-fn*idx)
-  // at two points we do the familiar
-  // 'p1 · [0...1] + p2 · [1...0]'
-    : pts[0] * fn*idx
-      + pts[1] * (1-fn*idx);
+  period = 360 / n;
+  angle = r * period;
+  delta = period - angle;
 
-function b_curv(pts, n) =
-// determine fn
-  let (fn=
-  // is n given? if so fn = n
-  n ? n :
-  // if no n is given,
-  // are there two controlpoints?
-  len(pts) == 2 ?
-  // if yes: fn = 2
-  2 :
-  // and if no, calculate:
-  length(pts)/fs)
-  // now knowing fn,
-  // call b_pts() and concatenate points
-    [for (i= [0:fn])
-      concat(b_pts(pts, 1/(fn-1), i))];
+  n2 = floor(n / 2);
+
+  start_h = envelope_height + o + wall;
+  total_height = crest_height - o;
+  lines = floor(total_height / (h + o));
+
+  for (i = [0:lines - 1]) {
+    n_eff = i % 2 == 0 ? n2 : n2 - 1;
+    oa_eff = i % 2 == 0 ? 0 : period / 2;
+    
+    translate([0, 0, start_h + i * (h + o)])
+    linear_extrude(h)
+    for(j = [0:n_eff - 1]) {
+      rotate(j * period)
+      rotate(oa_eff)
+      rotate([0, 0, delta / 2])
+      arc_ring(envelope_top_radius - 2 * wall, envelope_top_radius + 2 * wall, angle);
+    }
+
+  }
+}
 
 module envelope_sketch() {
   h = envelope_height;
   tr = envelope_top_radius;
   br = envelope_bottom_radius;
+  ch = crest_height;
+  w = wall;
 
-  points1 = b_curv([
-    [br, 0],
-    [br, h + wall],
-    [tr, h + wall],
-  ]);
-  points2 = b_curv([
-    [tr + wall, h],
-    [br + wall, h],
-    [br + wall, 0],
-  ]);
-
-  points = concat(
-    points2,
-    [
-      [tr + wall, h + crest_height],
-      [tr, h + crest_height],
-    ],
-    points1,
-  );
-
-//  points = polyRound(
-//     radiipoints = [
-//         [-h, br, 0],
-//         [0, br, 100],
-//         [0, tr, 0],
-//         [-wall, tr, 0],
-//         [0, br + wall, 100],
-//         [-h, br + wall, 0],
-//     ],
-//     fn=$fn
-// );
+  points = polyRound([
+    [       br,        0, 0],
+    [       br,        h, tr],
+    [       tr,        h, 0],
+    [       tr,   h + ch, 0],
+    [tr + wall,   h + ch, 0],
+    [tr + wall, h - wall, 0],
+    [br + wall, h - wall, tr - wall],
+    [br + wall,        0, 0],
+  ], fn=$fn);
 
   polygon(points);
 }
@@ -145,21 +106,55 @@ module envelope() {
     h = envelope_height + crest_height;
     w = 2 * (envelope_top_radius + wall);
 
-    translate([0, w / 2, h / 2 - 2 * TINY])
+    translate([0, - w / 2, h / 2 - 2 * TINY])
       cube([2 * w, w, 2 * h], center = true);
   }
 }
 
-module main() {
-  envelope();
-}
+module back_wall() {
+  tr = envelope_top_radius;
+  br = envelope_bottom_radius;
+  h = envelope_height;
+  ch = crest_height;
 
-module other_sketch() {
-  points = [
-    for (t = [0:envelope_top_radius * 2]) [t / 2, sinh(t / 2 / envelope_top_radius * 5)]
-  ];
+  points = polyRound([
+    [+br + side_anchor, 0, 0],
+    [+br + side_anchor, h - side_anchor, tr],
+    [+tr + side_anchor, h - side_anchor, 0],
+    [+tr + side_anchor, h + ch, 0],
+    [-(tr + side_anchor), h + ch, 0],
+    [-(tr + side_anchor), h - side_anchor, 0],
+    [-(br + side_anchor), h - side_anchor, tr],
+    [-(br + side_anchor), 0, 0],
+  ], fn=$fn);
 
+  rotate([90, 0, 0])
+  translate([0, 0, TINY])
+  linear_extrude(wall)
   polygon(points);
 }
 
-other_sketch();
+module box() {
+  w = wall + buldge_depth;
+
+  translate([0, 0, -box_height / 2])
+  difference() {
+    cube([box_width, box_length, box_height], center = true);
+
+    translate([0, 0, w + TINY])
+    cube([box_width - 2 * w, box_length - 2 * w, box_height - 2 * w], center = true);
+
+    translate([0, 0, (box_height - buldge_to_top) / 2 + TINY])
+    cube([box_width - buldge_depth, box_length - buldge_depth, buldge_to_top], center = true);
+  }
+}
+
+module main() {
+  difference() {
+    envelope();
+    #perforations();
+  }
+  back_wall();
+}
+
+main();
