@@ -24,7 +24,7 @@ cap_top_wall = 1.5;
 
 // Threading
 thread_pitch = 4;
-thread_depth = 1.5;
+thread_depth = 2;
 
 // Cone
 cone_height = 40;
