@@ -28,7 +28,7 @@ thread_depth = 2;
 
 // Cone
 cone_height = 40;
-cone_opening_diameter = 10;
+cone_opening_diameter = 5;
 
 // Perforations
 cone_hole_height = 0.7;
