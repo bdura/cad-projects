@@ -1,9 +1,9 @@
+include <BOSL2/bottlecaps.scad>
 include <BOSL2/std.scad>
 include <BOSL2/threading.scad>
-include <BOSL2/bottlecaps.scad>
 
-include <../lib/primitives.scad>
 include <../lib/constants.scad>
+include <../lib/primitives.scad>
 
 $fn = 360;
 
@@ -36,82 +36,82 @@ cone_hole_period = 3;
 cone_hole_n_by_line = 10;
 cone_hole_ratio = 0.8;
 
-module cap() {
-  inner = cap_inner_diameter / 2;
-  outer = inner + cap_width;
+module cap()
+{
+    inner = cap_inner_diameter / 2;
+    outer = inner + cap_width;
 
-  linear_extrude(cap_height)
-    ring(inner, outer);
+    linear_extrude(cap_height) ring(inner, outer);
 
-  translate([0, 0, cap_height - wall])
-  linear_extrude(wall)
-    difference() {
-      circle(outer);
-      square(2 * (inner - thread_depth - TOLERANCE), center=true);
-    };
+    threading_height = cap_height - thread_pitch;
 
+    starts = 4;
 
-  linear_extrude(cap_top_wall)
-    ring(inner - cap_top_width, outer);
+    translate(v = [ 0, 0, wall + cap_height / 2 ]) thread_helix(
+        d = (inner - thread_depth + TINY) * 2, turns = (cap_height - 1.5 * wall - thread_pitch) / thread_pitch / starts,
+        pitch = thread_pitch, starts = starts, thread_depth = thread_depth, internal = true, lead_in = 2);
+
+    linear_extrude(cap_top_wall) ring(inner - cap_top_width, outer);
 }
 
-module cone() {
-  inner = cap_inner_diameter / 2 - cap_top_width;
-  hole = cone_opening_diameter / 2;
-  height = cone_height;
+module cone()
+{
+    inner = cap_inner_diameter / 2 - cap_top_width;
+    hole = cone_opening_diameter / 2;
+    height = cone_height;
 
-  rotate_extrude()
-  polygon([
-    [inner, 0],
-    [inner + wall, 0],
-    [hole + wall, height],
-    [hole, height],
-  ]);
+    rotate_extrude() polygon([
+        [ inner, 0 ],
+        [ inner + wall, 0 ],
+        [ hole + wall, height ],
+        [ hole, height ],
+    ]);
 }
 
-module line_holes(inner, outer) {
-  outer = cap_inner_diameter / 2 - cap_top_width;
+module line_holes(inner, outer)
+{
+    outer = cap_inner_diameter / 2 - cap_top_width;
 
-  n = cone_hole_n_by_line;
-  ratio = cone_hole_ratio;
-  height = cone_hole_height;
+    n = cone_hole_n_by_line;
+    ratio = cone_hole_ratio;
+    height = cone_hole_height;
 
-  angle = 360 / n;
+    angle = 360 / n;
 
-  linear_extrude(height)
-  for(i = [0:n]) {
-    rotate(i * angle)
-    rotate((1 - ratio) * angle / 4)
-    intersection() {
-      ring(cone_opening_diameter / 2 - TINY, outer + TINY);
-      arc(outer + wall, angle / 2 * ratio);
+    linear_extrude(height) for (i = [0:n])
+    {
+        rotate(i * angle) rotate((1 - ratio) * angle / 4) intersection()
+        {
+            ring(cone_opening_diameter / 2 - TINY, outer + TINY);
+            arc(outer + wall, angle / 2 * ratio);
+        }
     }
-  }
 }
 
-module perforated_cone() {
-  angle = 360 / cone_hole_n_by_line;
+module perforated_cone()
+{
+    angle = 360 / cone_hole_n_by_line;
 
-  hoffset = wall + cone_hole_period;
-  max_height = cone_height - cone_hole_period;
+    hoffset = wall + cone_hole_period;
+    max_height = cone_height - cone_hole_period;
 
-  n = floor((max_height - hoffset) / cone_hole_period);
+    n = floor((max_height - hoffset) / cone_hole_period);
 
-  difference() {
-    cone();
+    difference()
+    {
+        cone();
 
-    for(i=[0:n]) {
-      translate([0, 0, i * cone_hole_period])
-      translate([0, 0, hoffset])
-      rotate(i * angle / 2)
-      line_holes();
+        for (i = [0:n])
+        {
+            translate([ 0, 0, i * cone_hole_period ]) translate([ 0, 0, hoffset ]) rotate(i * angle / 2) line_holes();
+        }
     }
-  }
 }
 
-module trap() {
-  cap();
-  perforated_cone();
+module trap()
+{
+    cap();
+    perforated_cone();
 }
 
 trap();
