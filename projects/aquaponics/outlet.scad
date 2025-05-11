@@ -14,6 +14,9 @@ tube_insert = 20;
 exhaust_insert = 10;
 ring_height = 5;
 
+exhaust_width = 50;
+clearance = 20;
+
 curvature = tube_or + 5;
 
 module contact_sketch()
@@ -51,29 +54,24 @@ module bend()
 
 // rotate_extrude() contact_sketch();
 
-exhaust_width = 50;
-exhaust_height = curvature + exhaust_insert + wall;
-
-rotate([ 0, -90, 0 ]) difference()
+module back_plate()
 {
-    union()
+    exhaust_height = curvature + exhaust_insert + wall;
+
+    rotate([ 0, -90, 0 ]) difference()
     {
+        union()
+        {
 
-        translate([ exhaust_height, 0 ]) cylinder(h = wall, r = exhaust_width / 2);
-        translate([ 0, -exhaust_width / 2 ]) cube([ exhaust_height, exhaust_width, wall ]);
+            translate([ exhaust_height, 0 ]) cylinder(h = wall, r = exhaust_width / 2);
+            translate([ 0, -exhaust_width / 2 ]) cube([ exhaust_height, exhaust_width, wall ]);
+        }
+
+        translate([ exhaust_height, 0, -TINY ]) cylinder(h = wall + 2 * TINY, r = tube_ir);
     }
-
-    translate([ exhaust_height, 0, -TINY ]) cylinder(h = wall + 2 * TINY, r = tube_ir);
 }
 
 curvature_clearance = curvature - tube_or;
-
-clearance = 20;
-
-translate([ clearance - curvature_clearance, 0, exhaust_insert + wall ]) bend();
-
-translate([ -TINY, 0, exhaust_height ]) rotate([ 0, 90, 0 ]) linear_extrude(clearance - curvature_clearance + 2 * TINY)
-    ring(tube_ir, tube_or);
 
 module support()
 {
@@ -91,4 +89,16 @@ module support()
     polygon(points);
 }
 
-rotate([ 90, 0, 0 ]) translate([ 0, 0, -wall ]) linear_extrude(2 * wall) support();
+module outlet()
+{
+    back_plate();
+    exhaust_height = curvature + exhaust_insert + wall;
+
+    translate([ clearance - curvature_clearance, 0, exhaust_insert + wall ]) bend();
+
+    translate([ -TINY, 0, exhaust_height ]) rotate([ 0, 90, 0 ])
+        linear_extrude(clearance - curvature_clearance + 2 * TINY) ring(tube_ir, tube_or);
+    rotate([ 90, 0, 0 ]) translate([ 0, 0, -wall ]) linear_extrude(2 * wall) support();
+}
+
+outlet();
