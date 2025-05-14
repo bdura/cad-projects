@@ -5,7 +5,7 @@ use <Round-Anything/polyround.scad>
 
 $fn = 360;
 
-tube_ir = 10 / 2;
+tube_ir = 10.2 / 2;
 tube_or = 16 / 2;
 
 wall = 2;
@@ -123,7 +123,7 @@ module mixer_mesh(width, step)
 module mixer()
 {
     ir = tube_ir - wall;
-    or = tube_ir + TOLERANCE;
+    or = tube_ir;
 
     rotate_extrude() polygon([
         [ tube_or - wall, 0 ],
