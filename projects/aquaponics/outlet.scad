@@ -19,6 +19,8 @@ clearance = 20;
 
 curvature = tube_or + 5;
 
+mixer_height = 20;
+
 module contact_sketch()
 {
     ir = tube_ir - wall;
@@ -51,8 +53,6 @@ module bend()
         [ tube_or, 0 ],
     ]);
 }
-
-// rotate_extrude() contact_sketch();
 
 module back_plate()
 {
@@ -101,4 +101,42 @@ module outlet()
     rotate([ 90, 0, 0 ]) translate([ 0, 0, -wall ]) linear_extrude(2 * wall) support();
 }
 
-outlet();
+module mixer_mesh(width, step)
+{
+    n = ceil(tube_or * 2 / step);
+    total_width = step * n;
+
+    intersection()
+    {
+        for (theta = [0:1])
+        {
+            rotate(90 * theta) translate([ -total_width / 2 - width / 2, -tube_or ]) for (i = [0:n])
+            {
+                translate([ i * (step), 0 ]) square([ width, tube_or * 2 ]);
+            }
+        }
+
+        circle(r = tube_or);
+    }
+}
+
+module mixer()
+{
+    ir = tube_ir - wall;
+    or = tube_ir + TOLERANCE;
+
+    rotate_extrude() polygon([
+        [ tube_or - wall, 0 ],
+        [ tube_or, 0 ],
+        [ tube_or, mixer_height ],
+        [ or, mixer_height ],
+        [ or, mixer_height + tube_insert ],
+        [ ir, mixer_height + tube_insert ],
+        [ ir, mixer_height - wall ],
+        [ tube_or - wall, mixer_height - 2 * wall ],
+    ]);
+
+    linear_extrude(mixer_height - 3 * wall) mixer_mesh(0.5, 2);
+}
+
+mixer();
