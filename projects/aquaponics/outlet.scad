@@ -5,10 +5,10 @@ use <Round-Anything/polyround.scad>
 
 $fn = 360;
 
-tube_ir = 10.2 / 2;
+tube_ir = 10.4 / 2;
 tube_or = 16 / 2;
 
-wall = 2;
+wall = 1;
 
 tube_insert = 20;
 exhaust_insert = 10;
@@ -21,10 +21,16 @@ curvature = tube_or + 5;
 
 mixer_height = 20;
 
+box_ledge_width = 17;
+box_ledge_depth = 50;
+
+box_ledge_notch_height = 18;
+box_ledge_notch_depth = 3;
+
 module contact_sketch()
 {
     ir = tube_ir - wall;
-    or = tube_ir - TOLERANCE;
+    or = tube_ir;
 
     polygon([
         [ ir, 0 ],
@@ -120,7 +126,7 @@ module mixer_mesh(width, step)
     }
 }
 
-module mixer()
+module mixer(insert = tube_insert)
 {
     ir = tube_ir - wall;
     or = tube_ir;
@@ -130,8 +136,8 @@ module mixer()
         [ tube_or, 0 ],
         [ tube_or, mixer_height ],
         [ or, mixer_height ],
-        [ or, mixer_height + tube_insert ],
-        [ ir, mixer_height + tube_insert ],
+        [ or, mixer_height + insert ],
+        [ ir, mixer_height + insert ],
         [ ir, mixer_height - wall ],
         [ tube_or - wall, mixer_height - 2 * wall ],
     ]);
@@ -139,4 +145,62 @@ module mixer()
     linear_extrude(mixer_height - 3 * wall) mixer_mesh(0.5, 2);
 }
 
-mixer();
+module stopper(with_square = true)
+{
+    ir = tube_ir - wall;
+    or = tube_ir - TOLERANCE;
+
+    translate([ 0, 0, -(exhaust_insert + wall) ])
+
+        union()
+    {
+        rotate_extrude() polygon([
+            [ or, 0 ],
+            [ or, exhaust_insert ],
+            [ ir, exhaust_insert ],
+            [ tube_ir, exhaust_insert + wall + TINY ],
+            [ tube_or, exhaust_insert + wall + TINY ],
+            [ tube_or, 0 ],
+        ]);
+
+        if (with_square)
+        {
+            translate([ tube_or, 0, 0 ]) linear_extrude(exhaust_insert + wall) square_tube_sketch(tube_ir);
+        }
+    }
+}
+
+module square_tube_sketch(ir = tube_ir - wall)
+{
+    or = tube_or;
+
+    translate([ -or, 0 ]) difference()
+    {
+        union()
+        {
+            translate([ 0, -or ]) square([ or, 2 * or ]);
+            circle(r = or);
+        }
+
+        circle(r = ir);
+    }
+}
+
+module ledge()
+{
+    rotate([ 0, 90, 0 ]) translate([ -TINY, 0, 0 ]) linear_extrude(box_ledge_width + 2 * TINY) square_tube_sketch();
+    ledge_leg();
+
+    translate([ box_ledge_width, 0, 0 ]) mirror([ 1, 0, 0 ]) ledge_leg();
+}
+
+module ledge_leg()
+{
+    depth = box_ledge_depth - (exhaust_insert + wall);
+    rotate([ -90, 0, 0 ]) rotate_extrude(angle = 90) square_tube_sketch();
+    translate([ 0, 0, -depth ]) linear_extrude(depth + TINY) square_tube_sketch();
+
+    translate([ -tube_or, 0, -depth ]) stopper();
+}
+
+rotate_extrude() contact_sketch();
