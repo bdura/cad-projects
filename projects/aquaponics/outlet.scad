@@ -22,7 +22,7 @@ curvature = tube_or + 5;
 mixer_height = 20;
 
 box_ledge_width = 17;
-box_ledge_depth = 50;
+box_ledge_depth = 30;
 
 box_ledge_notch_height = 18;
 box_ledge_notch_depth = 3;
@@ -126,7 +126,7 @@ module mixer_mesh(width, step)
     }
 }
 
-module mixer(insert = tube_insert)
+module mixer(insert = tube_insert, height = mixer_height, width = 0.5, step = 2, empty_height = 0)
 {
     ir = tube_ir - wall;
     or = tube_ir;
@@ -134,21 +134,23 @@ module mixer(insert = tube_insert)
     rotate_extrude() polygon([
         [ tube_or - wall, 0 ],
         [ tube_or, 0 ],
-        [ tube_or, mixer_height ],
-        [ or, mixer_height ],
-        [ or, mixer_height + insert ],
-        [ ir, mixer_height + insert ],
-        [ ir, mixer_height - wall ],
-        [ tube_or - wall, mixer_height - 2 * wall ],
+        [ tube_or, height ],
+        [ or, height ],
+        [ or, height + insert ],
+        [ ir, height + insert ],
+        [ ir, height - wall ],
+        [ tube_or - wall, height - 2 * wall ],
     ]);
 
-    linear_extrude(mixer_height - 3 * wall) mixer_mesh(0.5, 2);
+    empty_height = max(3 * wall, empty_height);
+
+    linear_extrude(height - empty_height) mixer_mesh(width, step);
 }
 
 module stopper(with_square = true)
 {
     ir = tube_ir - wall;
-    or = tube_ir - TOLERANCE;
+    or = tube_ir;
 
     translate([ 0, 0, -(exhaust_insert + wall) ])
 
@@ -192,6 +194,9 @@ module ledge()
     ledge_leg();
 
     translate([ box_ledge_width, 0, 0 ]) mirror([ 1, 0, 0 ]) ledge_leg();
+
+    translate([ -TINY, -tube_or, -box_ledge_notch_height ])
+        cube([ box_ledge_notch_depth + TINY, 2 * tube_or, box_ledge_notch_height + TINY ]);
 }
 
 module ledge_leg()
@@ -204,3 +209,7 @@ module ledge_leg()
 }
 
 rotate_extrude() contact_sketch();
+
+// mixer(insert = exhaust_insert, height = 15, width = 0.5, step = 3, empty_height = 5);
+
+// ledge();
