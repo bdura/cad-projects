@@ -49,5 +49,32 @@ module holder() {
           sketch();
 }
 
-holder();
-#sketch();
+module volume(bottom, top) {
+  slope = top_diameter / bottom_diameter;
+
+  width = (top_diameter + 2.0 * wall) * slope;
+  depth = (top_diameter) * slope;
+
+  h = height - bottom - top;
+
+  translate(v=[-(depth - width) / 2.0, 0.0, h / 2.0 + bottom])
+    cube(size=[width, width, h], center=true);
+}
+
+module clipped() {
+  angle = atan2(top_diameter - bottom_diameter, height);
+
+  bottom = (bottom_diameter / 2.0 + wall) * sin(angle);
+  top = (bottom_diameter / 2.0 + wall) * sin(angle);
+
+  translate(v=[0.0, 0.0, -bottom])
+    intersection() {
+      echo(bottom);
+      volume(bottom=bottom, top=top);
+
+      rotate(a=[0.0, angle, 0.0])
+        holder();
+    }
+}
+
+clipped();
