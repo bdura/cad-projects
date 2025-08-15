@@ -7,7 +7,14 @@ top_diameter = 22.8;
 bottom_diameter = 20.4;
 height = 31.0;
 
-cantilever = 10;
+angle = 5;
+
+cantilever_length = 15;
+
+dovetail_ratio = 0.5;
+dovetail_depth = 5;
+dovetail_base_width = 12;
+dovetail_height = 22;
 
 flexible_diameter = 16;
 
@@ -27,54 +34,59 @@ module holder_sketch() {
 
 module sketch() {
   width = bottom_diameter + 2.0 * wall;
-  depth = bottom_diameter / 2.0 + wall;
+  depth = top_diameter / 2.0 + wall;
 
-  difference() {
-    translate(v=[-depth / 2.0, 0.0])
-      square(size=[depth, width], center=true);
+  offset(1)
+    offset(-2)
+      offset(1)
+        union() {
+          difference() {
+            translate(v=[-depth / 2.0, 0.0])
+              square(size=[depth, width], center=true);
 
-    circle(r=bottom_diameter / 2.0);
-  }
+            circle(r=bottom_diameter / 2.0);
+          }
 
-  holder_sketch();
+          holder_sketch();
+        }
+
+  translate([-cantilever_length / 2.0 - top_diameter / 2.0, 0.0])
+    square([cantilever_length, width], center=true);
+}
+
+module dovetail(tol = 0.0) {
+  r = dovetail_ratio;
+  w = dovetail_base_width / 2.0 + tol;
+  h = dovetail_height;
+  d = dovetail_depth + tol;
+
+  polygon(
+    points=[
+      [-TINY, -w],
+      [d, -w - d * r],
+      [d, +w + d * r],
+      [-TINY, w],
+    ]
+  );
 }
 
 module holder() {
-  scale = top_diameter / bottom_diameter;
-
-  linear_extrude(height=height, scale=scale)
-    offset(1)
-      offset(-2)
-        offset(1)
-          sketch();
-}
-
-module volume(bottom, top) {
   slope = top_diameter / bottom_diameter;
 
-  width = (top_diameter + 2.0 * wall) * slope;
-  depth = (top_diameter) * slope;
+  difference() {
+    translate([0.0, 0.0, height / cos(angle)])
+      rotate([0.0, angle, 0.0])
+        translate([top_diameter / 2.0 + cantilever_length, 0.0, -height])
+          linear_extrude(height=height, scale=slope)
+            sketch();
 
-  h = height - bottom - top;
+    translate([-100, 0.0, 0.0])
+      cube(size=200, center=true);
 
-  translate(v=[-(depth - width) / 2.0, 0.0, h / 2.0 + bottom])
-    cube(size=[width, width, h], center=true);
+    translate([0.0, 0.0, -2])
+      linear_extrude(dovetail_height + 2)
+        dovetail(tol=TOLERANCE);
+  }
 }
 
-module clipped() {
-  angle = atan2(top_diameter - bottom_diameter, height);
-
-  bottom = (bottom_diameter / 2.0 + wall) * sin(angle);
-  top = (bottom_diameter / 2.0 + wall) * sin(angle);
-
-  translate(v=[0.0, 0.0, -bottom])
-    intersection() {
-      echo(bottom);
-      volume(bottom=bottom, top=top);
-
-      rotate(a=[0.0, angle, 0.0])
-        holder();
-    }
-}
-
-clipped();
+holder();
