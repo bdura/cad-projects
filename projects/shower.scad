@@ -1,20 +1,23 @@
 include <../lib/primitives.scad>
 include <../lib/constants.scad>
 
+use <Round-Anything/polyround.scad>
+
 $fn = 360;
 
 top_diameter = 22.8;
 bottom_diameter = 20.4;
 height = 31.0;
 
-angle = 5;
+angle = 10;
 
 cantilever_length = 15;
 
 dovetail_ratio = 0.5;
-dovetail_depth = 5;
+dovetail_depth = 6;
 dovetail_base_width = 12;
 dovetail_height = 22;
+dovetail_radius = 1;
 
 support_side = 100;
 support_chamfer = 2;
@@ -66,14 +69,19 @@ module dovetail(tol = 0.0) {
   h = dovetail_height;
   d = dovetail_depth + tol;
 
-  polygon(
-    points=[
-      [-TINY, -w],
-      [d, -w - d * r],
-      [d, +w + d * r],
-      [-TINY, w],
-    ]
+  radius = dovetail_radius;
+
+  points = polyRound(
+    radiipoints=[
+      [-TINY, -w, 0],
+      [d, -w - d * r, radius],
+      [d, +w + d * r, radius],
+      [-TINY, w, 0],
+    ],
+    fn=360,
   );
+
+  polygon(points);
 }
 
 module holder() {
@@ -130,7 +138,6 @@ module grip() {
   n = ceil(support_side * sqrt(2) / grip_period) + 1;
 
   for (i = [0:n]) {
-    echo(i);
     grip_pattern(i * grip_period);
   }
 }
