@@ -16,6 +16,12 @@ dovetail_depth = 5;
 dovetail_base_width = 12;
 dovetail_height = 22;
 
+support_side = 100;
+support_chamfer = 2;
+
+grip_height = 1;
+grip_period = 3;
+
 flexible_diameter = 16;
 
 wall = 4;
@@ -89,4 +95,47 @@ module holder() {
   }
 }
 
-holder();
+module support() {
+  side = support_side;
+  chamfer = support_chamfer;
+
+  linear_extrude(wall)
+    square(size=side, center=true);
+
+  translate([0.0, 0.0, wall - TINY])
+    linear_extrude(chamfer + TINY, scale=(side - chamfer) / side)
+      square(size=side, center=true);
+}
+
+module grip_sketch() {
+  s = grip_height + TINY;
+  w = s / sqrt(2) + TINY;
+
+  polygon(
+    [
+      [-w, 0.0],
+      [0.0, s],
+      [w, 0.0],
+    ]
+  );
+}
+
+module grip_pattern(radius) {
+  rotate_extrude()
+    translate([radius, 0])
+      grip_sketch();
+}
+
+module grip() {
+  n = ceil(support_side * sqrt(2) / grip_period) + 1;
+
+  for (i = [0:n]) {
+    echo(i);
+    grip_pattern(i * grip_period);
+  }
+}
+
+difference() {
+  support();
+  grip();
+}
