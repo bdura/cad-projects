@@ -95,7 +95,7 @@ module holder() {
   }
 }
 
-module support() {
+module support_plate() {
   side = support_side;
   chamfer = support_chamfer;
 
@@ -135,7 +135,20 @@ module grip() {
   }
 }
 
-difference() {
-  support();
-  grip();
+module support() {
+  difference() {
+    support_plate();
+    grip();
+  }
+
+  translate([dovetail_height / 2.0, 0, wall + support_chamfer - TINY])
+    rotate([0, -90, 0])
+      linear_extrude(dovetail_height)
+        dovetail(tol=0.0);
 }
+
+support();
+#color("blue")
+  translate([dovetail_height / 2.0, 0, wall + support_chamfer - TINY])
+    rotate([0, -90, 0])
+      holder();
