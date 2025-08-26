@@ -9,9 +9,9 @@ top_diameter = 22.8;
 bottom_diameter = 20.4;
 height = 31.0;
 
-angle = 10;
+angle = 17;
 
-cantilever_length = 15;
+cantilever_length = 20;
 
 dovetail_ratio = 0.5;
 dovetail_depth = 6;
@@ -99,7 +99,7 @@ module holder() {
 
     translate([0.0, 0.0, -2])
       linear_extrude(dovetail_height + 2)
-        dovetail(tol=TOLERANCE);
+        dovetail();
   }
 }
 
@@ -155,7 +155,6 @@ module support() {
 }
 
 support();
-#color("blue")
-  translate([dovetail_height / 2.0, 0, wall + support_chamfer - TINY])
-    rotate([0, -90, 0])
-      holder();
+translate([dovetail_height / 2.0, 0, wall + support_chamfer - TINY])
+  rotate([0, -90, 0])
+    holder();
