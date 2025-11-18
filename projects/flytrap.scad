@@ -28,7 +28,7 @@ thread_depth = 2;
 
 // Cone
 cone_height = 40;
-cone_opening_diameter = 5;
+cone_opening_diameter = 3;
 
 // Perforations
 cone_hole_height = 0.7;
@@ -44,12 +44,12 @@ module cap() {
     ring(inner, outer);
 
   translate([0, 0, cap_height - wall])
-  linear_extrude(wall)
-    difference() {
-      circle(outer);
-      square(2 * (inner - thread_depth - TOLERANCE), center=true);
-    };
-
+    linear_extrude(wall)
+      difference() {
+        circle(outer);
+        square(2 * (inner - thread_depth - TOLERANCE), center=true);
+      }
+  ;
 
   linear_extrude(cap_top_wall)
     ring(inner - cap_top_width, outer);
@@ -61,12 +61,14 @@ module cone() {
   height = cone_height;
 
   rotate_extrude()
-  polygon([
-    [inner, 0],
-    [inner + wall, 0],
-    [hole + wall, height],
-    [hole, height],
-  ]);
+    polygon(
+      [
+        [inner, 0],
+        [inner + wall, 0],
+        [hole + wall, height],
+        [hole, height],
+      ]
+    );
 }
 
 module line_holes(inner, outer) {
@@ -78,14 +80,13 @@ module line_holes(inner, outer) {
 
   angle = 360 / n;
 
-  linear_extrude(height)
-  for(i = [0:n]) {
+  linear_extrude(height)for (i = [0:n]) {
     rotate(i * angle)
-    rotate((1 - ratio) * angle / 4)
-    intersection() {
-      ring(cone_opening_diameter / 2 - TINY, outer + TINY);
-      arc(outer + wall, angle / 2 * ratio);
-    }
+      rotate((1 - ratio) * angle / 4)
+        intersection() {
+          ring(cone_opening_diameter / 2 - TINY, outer + TINY);
+          arc(outer + wall, angle / 2 * ratio);
+        }
   }
 }
 
@@ -100,11 +101,11 @@ module perforated_cone() {
   difference() {
     cone();
 
-    for(i=[0:n]) {
+    for (i = [0:n]) {
       translate([0, 0, i * cone_hole_period])
-      translate([0, 0, hoffset])
-      rotate(i * angle / 2)
-      line_holes();
+        translate([0, 0, hoffset])
+          rotate(i * angle / 2)
+            line_holes();
     }
   }
 }
