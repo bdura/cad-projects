@@ -9,54 +9,41 @@ $fn = 360;
 
 side = 5;
 
-total_length = 120;
+beam_length = 120;
 
-mouth_opening = 0.3;
-mouth_notch_offset = 5;
+slit_width = 0.4;
+slit_depth = 5;
 
-module notch_full() {
-  scale = 1.0 - mouth_opening / side * 2.0;
-
-  translate(v=[0, 0, mouth_opening])
-    mirror(v=[0, 0, 1])
-      linear_extrude(mouth_opening, scale=scale)
-        square(size=side, center=true);
-
-  translate(v=[0, 0, -mouth_opening])
-    linear_extrude(mouth_opening + TINY, scale=scale)
-      square(size=side, center=true);
-
-  translate(v=[0, 0, mouth_opening - TINY])
-    linear_extrude(mouth_notch_offset - mouth_opening + TINY)
-      square(size=side, center=true);
+module hole() {
+  rotate([90, 0, 0])
+    cylinder(h=side + 2 * TINY, r=slit_width, center=true);
 }
 
-module notch() {
-  translate(v=[0, 0, mouth_opening])
-    difference() {
-      notch_full();
-
-      linear_extrude(mouth_notch_offset + TINY) {
-        square(size=[side + TINY, mouth_opening], center=true);
-        square(size=[mouth_opening, side + TINY], center=true);
-      }
-    }
+module slit() {
+  translate([slit_depth / 2, 0, 0])
+    cube(size=[slit_depth + TINY, slit_width, side + 2 * TINY], center=true);
 }
 
 module beam() {
-  length = total_length - 2 * mouth_notch_offset;
-  rotate([90, 0, 0])
-    translate(v=[side / 2.0, side / 2.0, mouth_notch_offset + mouth_opening]) {
-      mirror([0, 0, 1])
-        notch();
+  h = beam_length;
+  d = slit_depth;
 
-      translate([0, 0, length])
-        notch();
-
-      translate([0, 0, -TINY])
-        linear_extrude(length + 2 * TINY)
+  difference() {
+    rotate([0, 90, 0])
+      translate(v=[0, 0, -h / 2])
+        linear_extrude(h)
           square(size=side, center=true);
+
+    for (i = [0:1]) {
+      mirror([i * 1, 0, 0]) {
+        translate([h / 2 - d, 0, 0])
+          slit();
+
+        translate([h / 2 - d, 0, 0])
+          hole();
+      }
     }
+  }
 }
 
 beam();
