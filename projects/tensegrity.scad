@@ -20,7 +20,12 @@ base_guide_width = 7;
 
 side_guide_width = 20;
 
+mid_guide_side = 40;
+mid_guide_depth = 10;
+
 wall = 2;
+
+BIG = 200;
 
 module hole() {
   w = 2 * slit_width;
@@ -68,8 +73,8 @@ module base_guide_corner() {
         mirror(v=[1, 0, 0])
           base_guide_sketch();
 
-      translate(v=[0, -100])
-        square(size=200, center=false);
+      translate(v=[0, -BIG / 2])
+        square(size=BIG, center=false);
     }
 }
 
@@ -121,4 +126,51 @@ module side_guide() {
     }
 }
 
-side_guide();
+module mid_guide_triangle() {
+  s = mid_guide_side;
+  h = s * sqrt(3) / 2;
+
+  translate([0, -h / 3])
+    polygon(
+      [
+        [-s / 2, 0],
+        [s / 2, 0],
+        [0, s * sqrt(3) / 2],
+      ]
+    );
+}
+
+module mid_guide_notch() {
+  w = beam_side * sqrt(2);
+
+  union() {
+    rotate([0, 0, 45])
+      square(size=beam_side, center=true);
+
+    translate([-w / 2, 0])
+      square([w, BIG]);
+  }
+}
+
+module mid_guide() {
+
+  s = mid_guide_side;
+  width = beam_side * sqrt(2) * 0.9;
+  h = s * sqrt(3) / 2;
+
+  linear_extrude(wall)
+    offset(0.4)
+      offset(-2.4)
+        offset(2)
+          difference() {
+            mid_guide_triangle();
+
+            for (i = [0:2]) {
+              rotate([0, 0, i * 120])
+                translate([0, 2 * h / 3 - mid_guide_depth])
+                  mid_guide_notch();
+            }
+          }
+}
+
+mid_guide();
