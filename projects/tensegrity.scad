@@ -12,8 +12,8 @@ side = 50;
 beam_side = 5;
 beam_length = 120;
 
-slit_width = 0.4;
-slit_depth = 5;
+hole_radius = 0.7;
+hole_offset = 5;
 
 base_guide_height = 15;
 base_guide_width = 7;
@@ -28,32 +28,28 @@ wall = 2;
 BIG = 200;
 
 module hole() {
-  w = 2 * slit_width;
-  rotate([90, 0, 0])
-    rotate([0, 0, 45])
-      cube([w, w, beam_side + 2 * TINY], center=true);
+  for (i = [0:1])
+    rotate([(-1 + 2 * i) * 45, 0, 0])
+      cylinder(h=beam_side * sqrt(2) + 2 * TINY, r=hole_radius, center=true);
 }
 
 module slit() {
-  translate([slit_depth / 2, 0, 0])
-    cube(size=[slit_depth + TINY, slit_width, beam_side + 2 * TINY], center=true);
+  translate([hole_offset / 2, 0, 0])
+    cube(size=[hole_offset + TINY, hole_radius, beam_side + 2 * TINY], center=true);
 }
 
 module beam() {
   h = beam_length;
-  d = slit_depth;
+  d = hole_offset;
 
   difference() {
     rotate([0, 90, 0])
       translate(v=[0, 0, -h / 2])
         linear_extrude(h)
-          square(size=side, center=true);
+          square(size=beam_side, center=true);
 
     for (i = [0:1]) {
       mirror([i * 1, 0, 0]) {
-        translate([h / 2 - d, 0, 0])
-          slit();
-
         translate([h / 2 - d, 0, 0])
           hole();
       }
@@ -173,4 +169,4 @@ module mid_guide() {
           }
 }
 
-mid_guide();
+beam();
