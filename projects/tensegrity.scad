@@ -17,7 +17,10 @@ slit_depth = 5;
 
 base_guide_height = 15;
 base_guide_width = 7;
-base_guide_wall = 2;
+
+side_guide_width = 20;
+
+wall = 2;
 
 module hole() {
   w = 2 * slit_width;
@@ -54,14 +57,14 @@ module beam() {
 }
 
 module base_guide_sketch() {
-  square(size=[base_guide_wall, base_guide_height], center=false);
-  square(size=[base_guide_width, base_guide_wall], center=false);
+  square(size=[wall, base_guide_height], center=false);
+  square(size=[base_guide_width, wall], center=false);
 }
 
 module base_guide_corner() {
   rotate_extrude(angle=120)
     intersection() {
-      translate([beam_side / 2 + base_guide_wall, 0])
+      translate([beam_side / 2 + wall, 0])
         mirror(v=[1, 0, 0])
           base_guide_sketch();
 
@@ -71,7 +74,7 @@ module base_guide_corner() {
 }
 
 module base_guide_rail() {
-  translate([base_guide_wall + beam_side / 2, TINY, 0])
+  translate([wall + beam_side / 2, TINY, 0])
     mirror([1, 0, 0])
       rotate([90, 0, 0])
         linear_extrude(side + 2 * TINY)
@@ -92,4 +95,30 @@ module base_guide() {
   }
 }
 
-base_guide();
+module side_guide() {
+  bs = beam_side;
+  s = (side - bs) / 2;
+
+  rotate([90, 0, 0])
+    linear_extrude(side_guide_width) {
+      for (i = [0:1]) {
+        mirror([i, 0])
+          polygon(
+            [
+              [-TINY, 0],
+              [s, 0],
+              [s, bs],
+              [s + bs, bs],
+              [s + bs, 0],
+              [s + bs + wall, 0],
+              [s + bs + wall, bs + wall],
+              [s - wall, bs + wall],
+              [s - wall, wall],
+              [-TINY, wall],
+            ]
+          );
+      }
+    }
+}
+
+side_guide();
