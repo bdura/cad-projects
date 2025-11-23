@@ -20,8 +20,10 @@ guide_wall = 2;
 guide_side = 50;
 
 module hole() {
+  w = 2 * slit_width;
   rotate([90, 0, 0])
-    cylinder(h=side + 2 * TINY, r=slit_width, center=true);
+    rotate([0, 0, 45])
+      cube([w, w, side + 2 * TINY], center=true);
 }
 
 module slit() {
@@ -90,4 +92,4 @@ module guide() {
   }
 }
 
-guide();
+beam();
