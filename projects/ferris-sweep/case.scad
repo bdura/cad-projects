@@ -5,6 +5,8 @@ use <./elements.scad>;
 
 $fn = 360;
 
+hand = "left";
+
 countour_width = 1;
 contour_tolerance = 0.2;
 
@@ -34,7 +36,7 @@ module contour(hand) {
         offset(contour_tolerance)
           body(hand);
 
-        trrs(hand);
+        cables(hand);
       }
 }
 
@@ -45,7 +47,7 @@ module perforated(hand) {
 
     translate(v=[0, 0, height - perforation])
       linear_extrude(perforation + TINY)
-        holes(hand);
+        perforations(hand);
   }
 }
 
@@ -79,4 +81,5 @@ module case(hand) {
   }
 }
 
-case("right");
+translate([-108, -260])
+  case(hand);

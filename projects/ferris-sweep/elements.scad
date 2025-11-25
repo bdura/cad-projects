@@ -1,21 +1,27 @@
-OFFSET = [-108.5, -250];
+module part(hand, element) {
+  import(file=str("./resources/", hand, "/", element, ".svg"), center=false);
+}
 
 module body(hand) {
-  import(file=str("./resources/sweepv2-", hand, "-body.svg"), center=false);
+  part(hand=hand, element="body");
 }
 
-module holes(hand) {
-  import(file=str("./resources/sweepv2-", hand, "-perforations.svg"), center=false);
+module perforations(hand) {
+  part(hand=hand, element="perforations");
 }
 
-module trrs(hand) {
-  import(file=str("./resources/sweepv2-", hand, "-trrs.svg"), center=false);
+module cables(hand) {
+  part(hand=hand, element="cables");
 }
 
-module magnets(hand) {
-  import(file=str("./resources/sweepv2-", hand, "-magnets.svg"), center=false);
+module tenting(hand) {
+  part(hand=hand, element="tenting");
 }
 
 module bumps(hand) {
-  import(file=str("./resources/sweepv2-", hand, "-bumps.svg"), center=false);
+  part(hand=hand, element="bumps");
+}
+
+module magnets(hand) {
+  part(hand=hand, element="magnets");
 }
