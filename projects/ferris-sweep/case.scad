@@ -81,5 +81,44 @@ module case(hand) {
   }
 }
 
-translate([-108, -260])
-  case(hand);
+// translate([-108, -260])
+//   case(hand);
+
+module magnet_test() {
+  difference() {
+    linear_extrude(height)
+      offset(2)
+        square(size=30, center=true);
+
+    for (i = [0:1]) {
+      for (j = [0:1]) {
+        translate(v=[(-1 + i * 2) * 10, (-1 + j * 2) * 10, 0]) {
+          translate(v=[0, 0, magnet_wall])
+            linear_extrude(height)
+              circle(3);
+
+          translate(v=[0, 0, -TINY])
+            linear_extrude(height)
+              offset(-2)
+                circle(3);
+        }
+      }
+    }
+  }
+}
+
+module bumper_test() {
+  difference() {
+    linear_extrude(height)
+      offset(2)
+        square([20, 10], center=true);
+
+    for (i = [0:1]) {
+      translate(v=[(-1 + i * 2) * 5.5, 0, -TINY])
+        linear_extrude(bumps_depth + TINY)
+          circle(4);
+    }
+  }
+}
+
+bumper_test();
