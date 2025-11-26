@@ -1,5 +1,6 @@
 module part(hand, element) {
-  import(file=str("./resources/", hand, "/", element, ".svg"), center=false);
+  translate([-108, -260])
+    import(file=str("./resources/", hand, "/", element, ".svg"), center=false);
 }
 
 module body(hand) {
