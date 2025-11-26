@@ -7,7 +7,7 @@ include <../lib/constants.scad>
 $fn = 360;
 
 cap_diameter = 77.8;
-cap_width = 6;
+cap_width = 3;
 cap_height = 12;
 cap_pitch = 3.9;
 thread_depth = 2;
@@ -42,24 +42,24 @@ main_tube_radius = cap_diameter / 2 - main_tube_width;
 ledge_width = cap_width + main_tube_width;
 
 module cap() {
-  inner = cap_diameter / 2;
+  inner = cap_diameter / 2 + thread_depth;
   outer = inner + cap_width;
 
-  linear_extrude(height=cap_height)
-    ring(inner, outer);
+  translate([0, 0, thread_depth]) {
+    linear_extrude(height=cap_height)
+      ring(inner, outer);
 
-  threading_height = cap_height - cap_pitch;
+    translate([0, 0, cap_height - thread_depth])
+      linear_extrude(thread_depth)
+        difference() {
+          circle(outer);
+          square(2 * (inner - thread_depth + TOLERANCE), center=true);
+        }
+    ;
+  }
 
-  translate(v=[0, 0, cap_height / 2])
-    thread_helix(
-      d=(inner - thread_depth + TINY) * 2,
-      turns=threading_height / cap_pitch / 6,
-      pitch=cap_pitch,
-      starts=6,
-      thread_depth=thread_depth,
-      internal=true,
-      lead_in=2
-    );
+  linear_extrude(thread_depth + TINY)
+    ring(inner=inner - 7, outer=outer);
 }
 
 module ledge() {
@@ -342,7 +342,7 @@ module untrigger_outer_chamfer() {
 }
 
 module untrigger() {
-  theta = 180 / n_feet;
+  theta = 180 / n_feet / 2;
   width = untrigger_tube_outer_radius + untrigger_wall;
 
   difference() {
@@ -358,7 +358,7 @@ module untrigger() {
   }
 }
 
-siphon();
+cap();
 
 //rotate([0, 0, 180 * (1 + 1 / n_feet / 2)])
 //color(c = "red")

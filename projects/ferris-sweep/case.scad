@@ -10,9 +10,9 @@ hand = "left";
 thickness = 3;
 
 // Contour
-countour_width = 1;
+countour_width = 1.5;
 contour_tolerance = 0.2;
-contour_height = 2;
+contour_height = 3;
 
 // Perforations
 perforation_depth = 1;
@@ -20,6 +20,7 @@ perforation_depth = 1;
 // Magnets
 magnet_wall = 0.4;
 magnet_height = 2;
+magnet_tolerance = 0.05;
 
 // Bumpers
 bumper_height = 2.6;
@@ -58,7 +59,8 @@ module perforated(hand) {
 module magnet_perforations(hand) {
   translate(v=[0, 0, magnet_wall])
     linear_extrude(thickness)
-      magnets(hand);
+      offset(magnet_tolerance)
+        magnets(hand);
 
   translate(v=[0, 0, -TINY])
     linear_extrude(thickness)
@@ -83,34 +85,23 @@ module case(hand) {
     magnet_perforations(hand);
     bumps_perforations(hand);
   }
-
-  color(c="grey", alpha=1.0)
-    translate(v=[0, 0, magnet_wall + TOLERANCE])
-      linear_extrude(magnet_height)
-        offset(-TOLERANCE)
-          magnets(hand);
 }
 
 module magnet_test() {
   difference() {
     linear_extrude(thickness)
       offset(2)
-        square(size=30, center=true);
+        square(size=10, center=true);
 
-    for (i = [0:1]) {
-      for (j = [0:1]) {
-        translate(v=[(-1 + i * 2) * 10, (-1 + j * 2) * 10, 0]) {
-          translate(v=[0, 0, magnet_wall])
-            linear_extrude(thickness)
-              circle(3);
+    translate(v=[0, 0, magnet_wall])
+      linear_extrude(thickness)
+        offset(magnet_tolerance)
+          circle(3);
 
-          translate(v=[0, 0, -TINY])
-            linear_extrude(thickness)
-              offset(-2)
-                circle(3);
-        }
-      }
-    }
+    translate(v=[0, 0, -TINY])
+      linear_extrude(thickness)
+        offset(-2)
+          circle(3);
   }
 }
 
@@ -128,4 +119,15 @@ module bumper_test() {
   }
 }
 
-case("right");
+module columns(hand) {
+  hull() left_column(hand);
+  hull() right_column(hand);
+}
+
+linear_extrude(0.6)
+  difference() {
+    body("left");
+    perforations("left");
+    offset(0.2)
+      columns("left");
+  }

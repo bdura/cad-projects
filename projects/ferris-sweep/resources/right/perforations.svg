@@ -26,15 +26,15 @@
      inkscape:pagecheckerboard="0"
      inkscape:deskcolor="#d1d1d1"
      inkscape:document-units="mm"
-     inkscape:zoom="1.1261202"
-     inkscape:cx="399.15809"
-     inkscape:cy="114.9966"
+     inkscape:zoom="0.85867241"
+     inkscape:cx="390.71944"
+     inkscape:cy="80.9389"
      inkscape:window-width="1704"
      inkscape:window-height="1028"
      inkscape:window-x="6"
      inkscape:window-y="50"
      inkscape:window-maximized="0"
-     inkscape:current-layer="iVnoP-Y2YCTeQW9BfDdm"
+     inkscape:current-layer="g18"
      showguides="true" />
   <defs
      id="defs1">
@@ -132,7 +132,7 @@
     <g
        id="g14"
        inkscape:label="left-body"
-       style="display:inline"
+       style="display:none"
        transform="translate(2.7703536e-5,2.7921025e-5)">
       <path
          style="color:#000000;display:none;fill:#000000;-inkscape-stroke:none"
@@ -667,7 +667,43 @@
            style="display:inline" />
       </g>
       <g
-         id="g5">
+         id="g7">
+        <use
+           xlink:href="#iVnoP-Y2YCTeQW9BfDdm_pad-17"
+           x="230274"
+           y="-88352"
+           id="use313"
+           style="display:inline" />
+        <use
+           xlink:href="#iVnoP-Y2YCTeQW9BfDdm_pad-17"
+           x="233274"
+           y="-88352"
+           id="use316"
+           style="display:inline" />
+        <use
+           xlink:href="#iVnoP-Y2YCTeQW9BfDdm_pad-17"
+           x="226274"
+           y="-88352"
+           id="use317"
+           style="display:inline" />
+        <use
+           xlink:href="#iVnoP-Y2YCTeQW9BfDdm_pad-17"
+           x="225174"
+           y="-83752"
+           id="use318"
+           style="display:inline"
+           transform="translate(2.7703536e-5,2.7921025e-5)" />
+      </g>
+    </g>
+    <g
+       id="g12"
+       inkscape:label="column"
+       style="display:none"
+       transform="translate(0,2.7921011e-5)">
+      <g
+         id="g5"
+         inkscape:label="right-column"
+         style="display:none">
         <use
            xlink:href="#iVnoP-Y2YCTeQW9BfDdm_pad-16"
            x="237789.41"
@@ -742,7 +778,9 @@
            style="display:inline" />
       </g>
       <g
-         id="g6">
+         id="g6"
+         inkscape:label="left-column"
+         style="display:inline">
         <use
            xlink:href="#iVnoP-Y2YCTeQW9BfDdm_pad-16"
            x="222569.41"
@@ -816,38 +854,10 @@
            id="use282"
            style="display:inline" />
       </g>
-      <g
-         id="g7">
-        <use
-           xlink:href="#iVnoP-Y2YCTeQW9BfDdm_pad-17"
-           x="230274"
-           y="-88352"
-           id="use313"
-           style="display:inline" />
-        <use
-           xlink:href="#iVnoP-Y2YCTeQW9BfDdm_pad-17"
-           x="233274"
-           y="-88352"
-           id="use316"
-           style="display:inline" />
-        <use
-           xlink:href="#iVnoP-Y2YCTeQW9BfDdm_pad-17"
-           x="226274"
-           y="-88352"
-           id="use317"
-           style="display:inline" />
-        <use
-           xlink:href="#iVnoP-Y2YCTeQW9BfDdm_pad-17"
-           x="225174"
-           y="-83752"
-           id="use318"
-           style="display:inline"
-           transform="translate(2.7703536e-5,2.7921025e-5)" />
-      </g>
     </g>
     <g
        id="g416"
-       style="display:inline;fill:#008000"
+       style="display:none;fill:#008000"
        inkscape:label="left-tenting"
        transform="translate(2.7703536e-5,2.7921025e-5)">
       <use
@@ -1178,7 +1188,7 @@
     <g
        id="g240-7"
        inkscape:label="add-ons"
-       style="display:inline"
+       style="display:none"
        transform="matrix(-1,0,0,1,260480.04,-49.986921)">
       <g
          id="g10-2"
@@ -1874,9 +1884,42 @@
            id="use238" />
       </g>
       <g
+         id="g3">
+        <use
+           xlink:href="#iVnoP-Y2YCTeQW9BfDdm_pad-17"
+           x="30076"
+           y="-83752"
+           id="use307" />
+        <use
+           xlink:href="#iVnoP-Y2YCTeQW9BfDdm_pad-17"
+           x="27076"
+           y="-83752"
+           id="use310" />
+        <rect
+           x="33076"
+           y="-84552"
+           width="2000"
+           height="1600"
+           rx="800"
+           ry="800"
+           id="use311" />
+        <use
+           xlink:href="#iVnoP-Y2YCTeQW9BfDdm_pad-17"
+           x="35176"
+           y="-88352"
+           id="use312" />
+      </g>
+    </g>
+    <g
+       id="g11"
+       inkscape:label="column"
+       style="display:none"
+       transform="translate(0,2.7921011e-5)">
+      <g
          id="g5-4"
-         style="display:inline"
-         transform="translate(-215071.97,0.14303358)">
+         style="display:none"
+         transform="translate(-215071.97,0.14303358)"
+         inkscape:label="left-column">
         <circle
            cx="237789.41"
            cy="-53086"
@@ -1950,11 +1993,13 @@
            style="display:inline" />
       </g>
       <g
-         id="g2">
-        <use
-           xlink:href="#iVnoP-Y2YCTeQW9BfDdm_pad-16"
-           x="37937.398"
-           y="-81026"
+         id="g2"
+         inkscape:label="right-column"
+         style="display:inline">
+        <circle
+           cx="37937.398"
+           cy="-81026"
+           r="762"
            id="use295" />
         <use
            xlink:href="#iVnoP-Y2YCTeQW9BfDdm_pad-16"
@@ -2011,32 +2056,6 @@
            cy="-53086"
            r="762"
            id="use306" />
-      </g>
-      <g
-         id="g3">
-        <use
-           xlink:href="#iVnoP-Y2YCTeQW9BfDdm_pad-17"
-           x="30076"
-           y="-83752"
-           id="use307" />
-        <use
-           xlink:href="#iVnoP-Y2YCTeQW9BfDdm_pad-17"
-           x="27076"
-           y="-83752"
-           id="use310" />
-        <rect
-           x="33076"
-           y="-84552"
-           width="2000"
-           height="1600"
-           rx="800"
-           ry="800"
-           id="use311" />
-        <use
-           xlink:href="#iVnoP-Y2YCTeQW9BfDdm_pad-17"
-           x="35176"
-           y="-88352"
-           id="use312" />
       </g>
     </g>
     <g

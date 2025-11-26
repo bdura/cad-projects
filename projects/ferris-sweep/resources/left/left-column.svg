@@ -9,7 +9,7 @@
    height="86.9138921531mm"
    viewBox="21754.999 -108391.5711531 216970.001 86913.8921531"
    id="iVnoP-Y2YCTeQW9BfDdm"
-   sodipodi:docname="perforations.svg"
+   sodipodi:docname="left-column.svg"
    inkscape:version="1.3.2 (091e20e, 2023-11-25)"
    xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
    xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
@@ -151,7 +151,7 @@
     <g
        id="g9"
        inkscape:label="left-perforations"
-       style="display:inline"
+       style="display:none"
        transform="translate(2.7703536e-5,2.7921025e-5)">
       <g
          id="g4">
@@ -698,7 +698,7 @@
     <g
        id="g12"
        inkscape:label="column"
-       style="display:none"
+       style="display:inline"
        transform="translate(0,2.7921011e-5)">
       <g
          id="g5"
