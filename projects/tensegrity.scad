@@ -169,4 +169,41 @@ module mid_guide() {
           }
 }
 
-beam();
+module guide_sketch() {
+  r = side * sqrt(3) / 3;
+
+  offset(0.2)
+    offset(-1.2)
+      offset(1)
+        union() {
+          circle(5);
+
+          translate([0, -wall / 2])
+            square(size=[r - beam_side / 2, wall], center=false);
+
+          translate([r - wall / 2 - beam_side / 2, 0])
+            square(size=[wall, beam_side + 2 * wall], center=true);
+        }
+
+  translate([r - wall / 2, 0])
+    difference() {
+      square(size=[beam_side + wall, beam_side + 2 * wall], center=true);
+
+      translate([wall, 0])
+        square(size=[beam_side + wall, beam_side], center=true);
+    }
+}
+
+module guide() {
+  linear_extrude(10)
+    difference() {
+      for (i = [0:2]) {
+        rotate(i * 120)
+          guide_sketch();
+      }
+
+      circle(5 - wall);
+    }
+}
+
+guide();
