@@ -16,6 +16,7 @@ contour_height = 3;
 
 // Perforations
 perforation_depth = 1;
+columns_offset = 0.2;
 
 // Magnets
 magnet_wall = 0.4;
@@ -45,6 +46,11 @@ module contour(hand) {
       }
 }
 
+module columns(hand) {
+  hull() left_column(hand);
+  hull() right_column(hand);
+}
+
 module perforated(hand) {
   difference() {
     linear_extrude(thickness)
@@ -52,7 +58,12 @@ module perforated(hand) {
 
     translate(v=[0, 0, thickness - perforation_depth])
       linear_extrude(perforation_depth + TINY)
-        perforations(hand);
+        union() {
+          perforations(hand);
+
+          offset(columns_offset)
+            columns(hand);
+        }
   }
 }
 
@@ -119,15 +130,4 @@ module bumper_test() {
   }
 }
 
-module columns(hand) {
-  hull() left_column(hand);
-  hull() right_column(hand);
-}
-
-linear_extrude(0.6)
-  difference() {
-    body("left");
-    perforations("left");
-    offset(0.2)
-      columns("left");
-  }
+case("right");
