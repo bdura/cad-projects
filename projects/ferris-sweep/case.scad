@@ -8,9 +8,10 @@ $fn = 360;
 hand = "left";
 
 thickness = 3;
+chamfer = 1;
 
 // Contour
-countour_width = 1.5;
+contour_width = 1.5;
 contour_tolerance = 0.2;
 contour_height = 3;
 
@@ -28,15 +29,24 @@ bumper_height = 2.6;
 bumper_depth = (bumper_height) / 2 + TOLERANCE;
 
 module body_with_contour(hand) {
-  offset(countour_width + contour_tolerance)
+  offset(contour_width + contour_tolerance)
     body(hand);
+}
+
+module chamfered_base(hand) {
+  minkowski($fn=72) {
+    linear_extrude(TINY)
+      offset(contour_width + contour_tolerance - chamfer, $fn=72)
+        body(hand);
+    cylinder(d1=0, d2=chamfer * 2, h=chamfer, $fn=72);
+  }
 }
 
 module contour(hand) {
   offset(0.3)
     offset(-0.3)
       difference() {
-        offset(countour_width + contour_tolerance)
+        offset(contour_width + contour_tolerance)
           body(hand);
 
         offset(contour_tolerance)
@@ -53,8 +63,13 @@ module columns(hand) {
 
 module perforated(hand) {
   difference() {
-    linear_extrude(thickness)
-      body_with_contour(hand);
+    union() {
+      translate([0, 0, chamfer])
+        linear_extrude(thickness - chamfer)
+          body_with_contour(hand);
+
+      chamfered_base(hand);
+    }
 
     translate(v=[0, 0, thickness - perforation_depth])
       linear_extrude(perforation_depth + TINY)
@@ -86,10 +101,11 @@ module bumps_perforations(hand) {
 }
 
 module case(hand) {
-  w = thickness + contour_height;
+  w = contour_height + TINY;
 
-  linear_extrude(w)
-    contour(hand);
+  translate([0, 0, thickness - TINY])
+    linear_extrude(w)
+      contour(hand);
 
   difference() {
     perforated(hand);
@@ -130,4 +146,4 @@ module bumper_test() {
   }
 }
 
-case("right");
+case("left");
