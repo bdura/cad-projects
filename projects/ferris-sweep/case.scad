@@ -12,12 +12,12 @@ chamfer = 1;
 
 // Contour
 contour_width = 1.5;
-contour_tolerance = 0.2;
+contour_tolerance = 0.1;
 contour_height = 3;
 
 // Perforations
 perforation_depth = 1;
-columns_offset = 0.2;
+special_perforation_offset = 0.4;
 
 // Magnets
 magnet_wall = 0.4;
@@ -56,11 +56,6 @@ module contour(hand) {
       }
 }
 
-module columns(hand) {
-  hull() left_column(hand);
-  hull() right_column(hand);
-}
-
 module perforated(hand) {
   difference() {
     union() {
@@ -76,8 +71,8 @@ module perforated(hand) {
         union() {
           perforations(hand);
 
-          offset(columns_offset)
-            columns(hand);
+          offset(special_perforation_offset)
+            special_perforations(hand);
         }
   }
 }
@@ -101,10 +96,8 @@ module bumps_perforations(hand) {
 }
 
 module case(hand) {
-  w = contour_height + TINY;
-
-  translate([0, 0, thickness - TINY])
-    linear_extrude(w)
+  translate([0, 0, chamfer])
+    linear_extrude(thickness + contour_height - chamfer)
       contour(hand);
 
   difference() {

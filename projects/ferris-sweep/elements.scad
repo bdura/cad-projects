@@ -27,10 +27,6 @@ module magnets(hand) {
   part(hand=hand, element="magnets");
 }
 
-module right_column(hand) {
-  part(hand=hand, element="right-column");
-}
-
-module left_column(hand) {
-  part(hand=hand, element="left-column");
+module special_perforations(hand) {
+  part(hand=hand, element="special-perforations");
 }

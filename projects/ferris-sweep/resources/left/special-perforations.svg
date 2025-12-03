@@ -9,7 +9,7 @@
    height="86.9138921531mm"
    viewBox="21754.999 -108391.5711531 216970.001 86913.8921531"
    id="iVnoP-Y2YCTeQW9BfDdm"
-   sodipodi:docname="right-column.svg"
+   sodipodi:docname="special-perforations.svg"
    inkscape:version="1.3.2 (091e20e, 2023-11-25)"
    xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
    xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
@@ -26,15 +26,15 @@
      inkscape:pagecheckerboard="0"
      inkscape:deskcolor="#d1d1d1"
      inkscape:document-units="mm"
-     inkscape:zoom="0.85867241"
-     inkscape:cx="390.71944"
-     inkscape:cy="80.9389"
+     inkscape:zoom="0.91799063"
+     inkscape:cx="428.10895"
+     inkscape:cy="145.42632"
      inkscape:window-width="1704"
      inkscape:window-height="1028"
      inkscape:window-x="6"
      inkscape:window-y="50"
      inkscape:window-maximized="0"
-     inkscape:current-layer="g18"
+     inkscape:current-layer="g7"
      showguides="true" />
   <defs
      id="defs1">
@@ -131,7 +131,7 @@
      transform="matrix(1.0000006,0,0,-1.0000006,2.7703536e-5,-129869.25)">
     <g
        id="g14"
-       inkscape:label="left-body"
+       inkscape:label="body"
        style="display:none"
        transform="translate(2.7703536e-5,2.7921025e-5)">
       <path
@@ -150,7 +150,7 @@
     </g>
     <g
        id="g9"
-       inkscape:label="left-perforations"
+       inkscape:label="perforations"
        style="display:none"
        transform="translate(2.7703536e-5,2.7921025e-5)">
       <g
@@ -666,198 +666,219 @@
            id="use119"
            style="display:inline" />
       </g>
-      <g
-         id="g7">
-        <use
-           xlink:href="#iVnoP-Y2YCTeQW9BfDdm_pad-17"
-           x="230274"
-           y="-88352"
-           id="use313"
-           style="display:inline" />
-        <use
-           xlink:href="#iVnoP-Y2YCTeQW9BfDdm_pad-17"
-           x="233274"
-           y="-88352"
-           id="use316"
-           style="display:inline" />
-        <use
-           xlink:href="#iVnoP-Y2YCTeQW9BfDdm_pad-17"
-           x="226274"
-           y="-88352"
-           id="use317"
-           style="display:inline" />
-        <use
-           xlink:href="#iVnoP-Y2YCTeQW9BfDdm_pad-17"
-           x="225174"
-           y="-83752"
-           id="use318"
-           style="display:inline"
-           transform="translate(2.7703536e-5,2.7921025e-5)" />
-      </g>
     </g>
     <g
-       id="g12"
-       inkscape:label="column"
-       style="display:inline"
-       transform="translate(0,2.7921011e-5)">
+       id="g20"
+       inkscape:label="special-perforations"
+       style="display:inline">
       <g
-         id="g5"
-         inkscape:label="right-column">
-        <use
-           xlink:href="#iVnoP-Y2YCTeQW9BfDdm_pad-16"
-           x="237789.41"
-           y="-53086"
-           id="use259"
-           style="display:inline" />
-        <use
-           xlink:href="#iVnoP-Y2YCTeQW9BfDdm_pad-16"
-           x="237789.41"
-           y="-55626"
-           id="use260"
-           style="display:inline" />
-        <use
-           xlink:href="#iVnoP-Y2YCTeQW9BfDdm_pad-16"
-           x="237789.41"
-           y="-58166"
-           id="use261"
-           style="display:inline" />
-        <use
-           xlink:href="#iVnoP-Y2YCTeQW9BfDdm_pad-16"
-           x="237789.41"
-           y="-60706"
-           id="use262"
-           style="display:inline" />
-        <use
-           xlink:href="#iVnoP-Y2YCTeQW9BfDdm_pad-16"
-           x="237789.41"
-           y="-63246"
-           id="use263"
-           style="display:inline" />
-        <use
-           xlink:href="#iVnoP-Y2YCTeQW9BfDdm_pad-16"
-           x="237789.41"
-           y="-65786"
-           id="use264"
-           style="display:inline" />
-        <use
-           xlink:href="#iVnoP-Y2YCTeQW9BfDdm_pad-16"
-           x="237789.41"
-           y="-68326"
-           id="use265"
-           style="display:inline" />
-        <use
-           xlink:href="#iVnoP-Y2YCTeQW9BfDdm_pad-16"
-           x="237789.41"
-           y="-70866"
-           id="use266"
-           style="display:inline" />
-        <use
-           xlink:href="#iVnoP-Y2YCTeQW9BfDdm_pad-16"
-           x="237789.41"
-           y="-73406"
-           id="use267"
-           style="display:inline" />
-        <use
-           xlink:href="#iVnoP-Y2YCTeQW9BfDdm_pad-16"
-           x="237789.41"
-           y="-75946"
-           id="use268"
-           style="display:inline" />
-        <use
-           xlink:href="#iVnoP-Y2YCTeQW9BfDdm_pad-16"
-           x="237789.41"
-           y="-78486"
-           id="use269"
-           style="display:inline" />
-        <use
-           xlink:href="#iVnoP-Y2YCTeQW9BfDdm_pad-16"
-           x="237789.41"
-           y="-81026"
-           id="use270"
-           style="display:inline" />
+         id="g7"
+         style="display:inline"
+         transform="translate(0,2.7921011e-5)"
+         inkscape:label="trrs">
+        <rect
+           x="229274"
+           y="-89152"
+           width="2000"
+           height="1600"
+           rx="800"
+           ry="800"
+           id="use313" />
+        <rect
+           x="232274"
+           y="-89152"
+           width="2000"
+           height="1600"
+           rx="800"
+           ry="800"
+           id="use316" />
+        <rect
+           x="225274"
+           y="-89152"
+           width="2000"
+           height="1600"
+           rx="800"
+           ry="800"
+           id="use317" />
+        <rect
+           x="224174"
+           y="-84552"
+           width="2000"
+           height="1600"
+           rx="800"
+           ry="800"
+           id="use318" />
+        <rect
+           style="display:inline;fill:#000000;stroke:#000000;stroke-width:0"
+           id="rect21"
+           width="7000"
+           height="1600"
+           x="226274"
+           y="87552"
+           transform="scale(1,-1)"
+           inkscape:label="rect21" />
       </g>
       <g
-         id="g6"
-         inkscape:label="left-column"
-         style="display:none">
-        <use
-           xlink:href="#iVnoP-Y2YCTeQW9BfDdm_pad-16"
-           x="222569.41"
-           y="-81026"
-           id="use271"
-           style="display:inline" />
-        <use
-           xlink:href="#iVnoP-Y2YCTeQW9BfDdm_pad-16"
-           x="222569.41"
-           y="-78486"
-           id="use272"
-           style="display:inline" />
-        <use
-           xlink:href="#iVnoP-Y2YCTeQW9BfDdm_pad-16"
-           x="222569.41"
-           y="-75946"
-           id="use273"
-           style="display:inline" />
-        <use
-           xlink:href="#iVnoP-Y2YCTeQW9BfDdm_pad-16"
-           x="222569.41"
-           y="-73406"
-           id="use274"
-           style="display:inline" />
-        <use
-           xlink:href="#iVnoP-Y2YCTeQW9BfDdm_pad-16"
-           x="222569.41"
-           y="-70866"
-           id="use275"
-           style="display:inline" />
-        <use
-           xlink:href="#iVnoP-Y2YCTeQW9BfDdm_pad-16"
-           x="222569.41"
-           y="-68326"
-           id="use276"
-           style="display:inline" />
-        <use
-           xlink:href="#iVnoP-Y2YCTeQW9BfDdm_pad-16"
-           x="222569.41"
-           y="-65786"
-           id="use277"
-           style="display:inline" />
-        <use
-           xlink:href="#iVnoP-Y2YCTeQW9BfDdm_pad-16"
-           x="222569.41"
-           y="-63246"
-           id="use278"
-           style="display:inline" />
-        <use
-           xlink:href="#iVnoP-Y2YCTeQW9BfDdm_pad-16"
-           x="222569.41"
-           y="-60706"
-           id="use279"
-           style="display:inline" />
-        <use
-           xlink:href="#iVnoP-Y2YCTeQW9BfDdm_pad-16"
-           x="222569.41"
-           y="-58166"
-           id="use280"
-           style="display:inline" />
-        <use
-           xlink:href="#iVnoP-Y2YCTeQW9BfDdm_pad-16"
-           x="222569.41"
-           y="-55626"
-           id="use281"
-           style="display:inline" />
-        <use
-           xlink:href="#iVnoP-Y2YCTeQW9BfDdm_pad-16"
-           x="222569.41"
-           y="-53086"
-           id="use282"
-           style="display:inline" />
+         id="g21"
+         inkscape:label="right">
+        <g
+           id="g5"
+           style="display:inline"
+           transform="translate(0,2.7921011e-5)">
+          <circle
+             cx="237789.41"
+             cy="-53086"
+             r="762"
+             id="use259" />
+          <circle
+             cx="237789.41"
+             cy="-55626"
+             r="762"
+             id="use260" />
+          <circle
+             cx="237789.41"
+             cy="-58166"
+             r="762"
+             id="use261" />
+          <circle
+             cx="237789.41"
+             cy="-60706"
+             r="762"
+             id="use262" />
+          <circle
+             cx="237789.41"
+             cy="-63246"
+             r="762"
+             id="use263" />
+          <circle
+             cx="237789.41"
+             cy="-65786"
+             r="762"
+             id="use264" />
+          <circle
+             cx="237789.41"
+             cy="-68326"
+             r="762"
+             id="use265" />
+          <circle
+             cx="237789.41"
+             cy="-70866"
+             r="762"
+             id="use266" />
+          <circle
+             cx="237789.41"
+             cy="-73406"
+             r="762"
+             id="use267" />
+          <circle
+             cx="237789.41"
+             cy="-75946"
+             r="762"
+             id="use268" />
+          <circle
+             cx="237789.41"
+             cy="-78486"
+             r="762"
+             id="use269" />
+          <circle
+             cx="237789.41"
+             cy="-81026"
+             r="762"
+             id="use270" />
+        </g>
+        <rect
+           style="display:inline;fill:#000000;stroke:#000000;stroke-width:0"
+           id="rect20"
+           width="1524"
+           height="27940"
+           x="237027.41"
+           y="53086"
+           transform="matrix(1,0,0,-1,0,2.7921011e-5)" />
+      </g>
+      <g
+         id="g19"
+         style="display:inline"
+         transform="translate(0,2.7921011e-5)"
+         inkscape:label="left">
+        <g
+           id="g6"
+           style="display:inline"
+           transform="translate(-2.770354e-5)">
+          <circle
+             cx="222569.41"
+             cy="-81026"
+             r="762"
+             id="use271" />
+          <circle
+             cx="222569.41"
+             cy="-78486"
+             r="762"
+             id="use272" />
+          <circle
+             cx="222569.41"
+             cy="-75946"
+             r="762"
+             id="use273" />
+          <circle
+             cx="222569.41"
+             cy="-73406"
+             r="762"
+             id="use274" />
+          <circle
+             cx="222569.41"
+             cy="-70866"
+             r="762"
+             id="use275" />
+          <circle
+             cx="222569.41"
+             cy="-68326"
+             r="762"
+             id="use276" />
+          <circle
+             cx="222569.41"
+             cy="-65786"
+             r="762"
+             id="use277" />
+          <circle
+             cx="222569.41"
+             cy="-63246"
+             r="762"
+             id="use278" />
+          <circle
+             cx="222569.41"
+             cy="-60706"
+             r="762"
+             id="use279" />
+          <circle
+             cx="222569.41"
+             cy="-58166"
+             r="762"
+             id="use280" />
+          <circle
+             cx="222569.41"
+             cy="-55626"
+             r="762"
+             id="use281" />
+          <circle
+             cx="222569.41"
+             cy="-53086"
+             r="762"
+             id="use282" />
+        </g>
+        <rect
+           style="fill:#000000;stroke:#000000;stroke-width:0"
+           id="rect16"
+           width="1524"
+           height="27940"
+           x="221807.41"
+           y="53086"
+           transform="scale(1,-1)" />
       </g>
     </g>
     <g
        id="g416"
        style="display:none;fill:#008000"
-       inkscape:label="left-tenting"
+       inkscape:label="tenting"
        transform="translate(2.7703536e-5,2.7921025e-5)">
       <use
          xlink:href="#iVnoP-Y2YCTeQW9BfDdm_pad-22"
@@ -887,7 +908,7 @@
     <g
        id="g420"
        style="display:none"
-       inkscape:label="left-discard"
+       inkscape:label="discard"
        transform="translate(2.7703536e-5,2.7921025e-5)">
       <g
          id="g419"
@@ -1429,11 +1450,11 @@
   <g
      id="g17"
      inkscape:label="right"
-     style="display:inline"
+     style="display:none"
      transform="matrix(1.0000006,0,0,-1.0000006,2.7703536e-5,-129869.25)">
     <g
        id="g13"
-       inkscape:label="right-body"
+       inkscape:label="body"
        style="display:none"
        transform="translate(2.7703536e-5,2.7921025e-5)">
       <path
@@ -1450,7 +1471,7 @@
     </g>
     <g
        id="g8"
-       inkscape:label="right-perforations"
+       inkscape:label="perforations"
        style="display:none"
        transform="translate(2.7703536e-5,2.7921025e-5)">
       <g
@@ -1882,8 +1903,16 @@
            y="-85117.391"
            id="use238" />
       </g>
+    </g>
+    <g
+       id="g11"
+       inkscape:label="special-perforations"
+       style="display:inline"
+       transform="translate(0,2.7921011e-5)">
       <g
-         id="g3">
+         id="g3"
+         style="display:inline"
+         inkscape:label="trrs">
         <use
            xlink:href="#iVnoP-Y2YCTeQW9BfDdm_pad-17"
            x="30076"
@@ -1891,176 +1920,201 @@
            id="use307" />
         <use
            xlink:href="#iVnoP-Y2YCTeQW9BfDdm_pad-17"
-           x="27076"
-           y="-83752"
-           id="use310" />
-        <rect
-           x="33076"
-           y="-84552"
-           width="2000"
-           height="1600"
-           rx="800"
-           ry="800"
-           id="use311" />
-        <use
-           xlink:href="#iVnoP-Y2YCTeQW9BfDdm_pad-17"
            x="35176"
            y="-88352"
            id="use312" />
-      </g>
-    </g>
-    <g
-       id="g11"
-       inkscape:label="column"
-       style="display:none"
-       transform="translate(0,2.7921011e-5)">
-      <g
-         id="g5-4"
-         style="display:none"
-         transform="translate(-215071.97,0.14303358)"
-         inkscape:label="left-column">
-        <circle
-           cx="237789.41"
-           cy="-53086"
-           r="762"
-           id="use259-8" />
-        <use
-           xlink:href="#iVnoP-Y2YCTeQW9BfDdm_pad-16"
-           x="237789.41"
-           y="-55626"
-           id="use260-3"
-           style="display:inline" />
-        <use
-           xlink:href="#iVnoP-Y2YCTeQW9BfDdm_pad-16"
-           x="237789.41"
-           y="-58166"
-           id="use261-9"
-           style="display:inline" />
-        <use
-           xlink:href="#iVnoP-Y2YCTeQW9BfDdm_pad-16"
-           x="237789.41"
-           y="-60706"
-           id="use262-0"
-           style="display:inline" />
-        <use
-           xlink:href="#iVnoP-Y2YCTeQW9BfDdm_pad-16"
-           x="237789.41"
-           y="-63246"
-           id="use263-5"
-           style="display:inline" />
-        <use
-           xlink:href="#iVnoP-Y2YCTeQW9BfDdm_pad-16"
-           x="237789.41"
-           y="-65786"
-           id="use264-2"
-           style="display:inline" />
-        <use
-           xlink:href="#iVnoP-Y2YCTeQW9BfDdm_pad-16"
-           x="237789.41"
-           y="-68326"
-           id="use265-2"
-           style="display:inline" />
-        <use
-           xlink:href="#iVnoP-Y2YCTeQW9BfDdm_pad-16"
-           x="237789.41"
-           y="-70866"
-           id="use266-7"
-           style="display:inline" />
-        <use
-           xlink:href="#iVnoP-Y2YCTeQW9BfDdm_pad-16"
-           x="237789.41"
-           y="-73406"
-           id="use267-3"
-           style="display:inline" />
-        <use
-           xlink:href="#iVnoP-Y2YCTeQW9BfDdm_pad-16"
-           x="237789.41"
-           y="-75946"
-           id="use268-7"
-           style="display:inline" />
-        <use
-           xlink:href="#iVnoP-Y2YCTeQW9BfDdm_pad-16"
-           x="237789.41"
-           y="-78486"
-           id="use269-9"
-           style="display:inline" />
-        <use
-           xlink:href="#iVnoP-Y2YCTeQW9BfDdm_pad-16"
-           x="237789.41"
-           y="-81026"
-           id="use270-0"
-           style="display:inline" />
+        <g
+           id="g12">
+          <use
+             xlink:href="#iVnoP-Y2YCTeQW9BfDdm_pad-17"
+             x="27076"
+             y="-83752"
+             id="use310" />
+          <path
+             id="use311"
+             d="m 33876,-84552 h 400 c 443.2,0 800,356.8 800,800 0,443.2 -356.8,800 -800,800 h -400 c -443.2,0 -800,-356.8 -800,-800 0,-443.2 356.8,-800 800,-800 z" />
+          <rect
+             style="fill:#000000;stroke:#000000;stroke-width:0"
+             id="rect2"
+             width="7092.7793"
+             height="1600"
+             x="26983.221"
+             y="82952"
+             transform="scale(1,-1)" />
+        </g>
       </g>
       <g
-         id="g2"
-         inkscape:label="right-column"
-         style="display:inline">
-        <circle
-           cx="37937.398"
-           cy="-81026"
-           r="762"
-           id="use295" />
-        <use
-           xlink:href="#iVnoP-Y2YCTeQW9BfDdm_pad-16"
-           x="37937.398"
-           y="-78486"
-           id="use296" />
-        <use
-           xlink:href="#iVnoP-Y2YCTeQW9BfDdm_pad-16"
-           x="37937.398"
-           y="-75946"
-           id="use297" />
-        <use
-           xlink:href="#iVnoP-Y2YCTeQW9BfDdm_pad-16"
-           x="37937.398"
-           y="-73406"
-           id="use298" />
-        <use
-           xlink:href="#iVnoP-Y2YCTeQW9BfDdm_pad-16"
-           x="37937.398"
-           y="-70866"
-           id="use299" />
-        <use
-           xlink:href="#iVnoP-Y2YCTeQW9BfDdm_pad-16"
-           x="37937.398"
-           y="-68326"
-           id="use300" />
-        <use
-           xlink:href="#iVnoP-Y2YCTeQW9BfDdm_pad-16"
-           x="37937.398"
-           y="-65786"
-           id="use301" />
-        <use
-           xlink:href="#iVnoP-Y2YCTeQW9BfDdm_pad-16"
-           x="37937.398"
-           y="-63246"
-           id="use302" />
-        <use
-           xlink:href="#iVnoP-Y2YCTeQW9BfDdm_pad-16"
-           x="37937.398"
-           y="-60706"
-           id="use303" />
-        <use
-           xlink:href="#iVnoP-Y2YCTeQW9BfDdm_pad-16"
-           x="37937.398"
-           y="-58166"
-           id="use304" />
-        <use
-           xlink:href="#iVnoP-Y2YCTeQW9BfDdm_pad-16"
-           x="37937.398"
-           y="-55626"
-           id="use305" />
-        <circle
-           cx="37937.398"
-           cy="-53086"
-           r="762"
-           id="use306" />
+         id="g16"
+         inkscape:label="left">
+        <g
+           id="g5-4"
+           style="display:inline"
+           transform="translate(-215071.97,0.14303358)"
+           inkscape:label="left-column">
+          <circle
+             cx="237789.41"
+             cy="-53086"
+             r="762"
+             id="use259-8" />
+          <use
+             xlink:href="#iVnoP-Y2YCTeQW9BfDdm_pad-16"
+             x="237789.41"
+             y="-55626"
+             id="use260-3"
+             style="display:inline" />
+          <use
+             xlink:href="#iVnoP-Y2YCTeQW9BfDdm_pad-16"
+             x="237789.41"
+             y="-58166"
+             id="use261-9"
+             style="display:inline" />
+          <use
+             xlink:href="#iVnoP-Y2YCTeQW9BfDdm_pad-16"
+             x="237789.41"
+             y="-60706"
+             id="use262-0"
+             style="display:inline" />
+          <use
+             xlink:href="#iVnoP-Y2YCTeQW9BfDdm_pad-16"
+             x="237789.41"
+             y="-63246"
+             id="use263-5"
+             style="display:inline" />
+          <use
+             xlink:href="#iVnoP-Y2YCTeQW9BfDdm_pad-16"
+             x="237789.41"
+             y="-65786"
+             id="use264-2"
+             style="display:inline" />
+          <use
+             xlink:href="#iVnoP-Y2YCTeQW9BfDdm_pad-16"
+             x="237789.41"
+             y="-68326"
+             id="use265-2"
+             style="display:inline" />
+          <use
+             xlink:href="#iVnoP-Y2YCTeQW9BfDdm_pad-16"
+             x="237789.41"
+             y="-70866"
+             id="use266-7"
+             style="display:inline" />
+          <use
+             xlink:href="#iVnoP-Y2YCTeQW9BfDdm_pad-16"
+             x="237789.41"
+             y="-73406"
+             id="use267-3"
+             style="display:inline" />
+          <use
+             xlink:href="#iVnoP-Y2YCTeQW9BfDdm_pad-16"
+             x="237789.41"
+             y="-75946"
+             id="use268-7"
+             style="display:inline" />
+          <use
+             xlink:href="#iVnoP-Y2YCTeQW9BfDdm_pad-16"
+             x="237789.41"
+             y="-78486"
+             id="use269-9"
+             style="display:inline" />
+          <use
+             xlink:href="#iVnoP-Y2YCTeQW9BfDdm_pad-16"
+             x="237789.41"
+             y="-81026"
+             id="use270-0"
+             style="display:inline" />
+        </g>
+        <rect
+           style="display:inline;fill:#000000;stroke:#000000;stroke-width:0"
+           id="rect15"
+           width="1524"
+           height="27940.143"
+           x="21955.436"
+           y="53085.855"
+           transform="scale(1,-1)" />
+      </g>
+      <g
+         id="g15"
+         inkscape:label="right">
+        <rect
+           style="display:inline;fill:#000000;stroke:#000000;stroke-width:0"
+           id="rect12"
+           width="1524"
+           height="27940"
+           x="37175.398"
+           y="53086"
+           transform="scale(1,-1)"
+           inkscape:label="rect12" />
+        <g
+           id="g2"
+           inkscape:label="right-column"
+           style="display:inline">
+          <circle
+             cx="37937.398"
+             cy="-81026"
+             r="762"
+             id="use295" />
+          <use
+             xlink:href="#iVnoP-Y2YCTeQW9BfDdm_pad-16"
+             x="37937.398"
+             y="-78486"
+             id="use296" />
+          <use
+             xlink:href="#iVnoP-Y2YCTeQW9BfDdm_pad-16"
+             x="37937.398"
+             y="-75946"
+             id="use297" />
+          <use
+             xlink:href="#iVnoP-Y2YCTeQW9BfDdm_pad-16"
+             x="37937.398"
+             y="-73406"
+             id="use298" />
+          <use
+             xlink:href="#iVnoP-Y2YCTeQW9BfDdm_pad-16"
+             x="37937.398"
+             y="-70866"
+             id="use299" />
+          <use
+             xlink:href="#iVnoP-Y2YCTeQW9BfDdm_pad-16"
+             x="37937.398"
+             y="-68326"
+             id="use300" />
+          <use
+             xlink:href="#iVnoP-Y2YCTeQW9BfDdm_pad-16"
+             x="37937.398"
+             y="-65786"
+             id="use301" />
+          <use
+             xlink:href="#iVnoP-Y2YCTeQW9BfDdm_pad-16"
+             x="37937.398"
+             y="-63246"
+             id="use302" />
+          <use
+             xlink:href="#iVnoP-Y2YCTeQW9BfDdm_pad-16"
+             x="37937.398"
+             y="-60706"
+             id="use303" />
+          <use
+             xlink:href="#iVnoP-Y2YCTeQW9BfDdm_pad-16"
+             x="37937.398"
+             y="-58166"
+             id="use304" />
+          <use
+             xlink:href="#iVnoP-Y2YCTeQW9BfDdm_pad-16"
+             x="37937.398"
+             y="-55626"
+             id="use305" />
+          <circle
+             cx="37937.398"
+             cy="-53086"
+             r="762"
+             id="use306" />
+        </g>
       </g>
     </g>
     <g
        id="g415"
        style="display:none"
-       inkscape:label="right-tenting"
+       inkscape:label="tenting"
        transform="translate(2.7703536e-5,2.7921025e-5)">
       <use
          xlink:href="#iVnoP-Y2YCTeQW9BfDdm_pad-22"
@@ -2090,7 +2144,7 @@
     <g
        id="g421"
        style="display:none;fill:#800000"
-       inkscape:label="right-discard"
+       inkscape:label="discard"
        transform="translate(2.7703536e-5,2.7921025e-5)">
       <use
          xlink:href="#iVnoP-Y2YCTeQW9BfDdm_pad-13"
