@@ -5,10 +5,8 @@ use <./elements.scad>;
 
 $fn = 360;
 
-hand = "left";
-
 thickness = 3;
-chamfer = 1;
+chamfer = 1.5;
 
 // Contour
 contour_width = 1.5;
@@ -139,4 +137,8 @@ module bumper_test() {
   }
 }
 
-case("left");
+translate([2, 0, 0])
+  case("left");
+
+translate([-2, 0, 0])
+  case("right");
