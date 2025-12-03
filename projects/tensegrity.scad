@@ -217,21 +217,37 @@ module guide() {
 module holder_support() {
   dx = beam_side / sqrt(2);
   h = (beam_length - side) / 2;
+  w = holder_wall;
 
   extrusion_height = dx + holder_wall * sqrt(2);
 
   rotate([90, 0, 0])
-    translate([0, 0, -extrusion_height])
+    translate([0, 0, -extrusion_height]) {
+      for (i = [0:1])
+        translate([0, 0, i * (extrusion_height * 2 - w)])
+          linear_extrude(w)
+            polygon(
+              [
+                [-dx, -TINY],
+                [dx, -TINY],
+                [dx, h],
+                [0, h - dx],
+                [-dx, h],
+              ]
+            );
+
       linear_extrude(extrusion_height * 2)
         polygon(
           [
-            [-dx, -TINY],
-            [dx, -TINY],
             [dx, h],
             [0, h - dx],
             [-dx, h],
+            [-dx, h - w],
+            [0, h - dx - w],
+            [dx, h - w],
           ]
         );
+    }
 }
 
 module holder() {
