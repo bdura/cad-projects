@@ -7,13 +7,13 @@ include <../lib/constants.scad>
 
 $fn = 360;
 
-side = 50;
+side = 60;
 
 beam_side = 5;
 beam_length = 120;
 
 hole_radius = 0.7;
-hole_offset = 5;
+hole_offset = 7;
 
 base_guide_height = 15;
 base_guide_width = 7;
@@ -206,4 +206,21 @@ module guide() {
     }
 }
 
-guide();
+module beam_pair() {
+  for (i = [0:1]) {
+    translate([0, (2 * i - 1) * side / 2, 0])
+      beam();
+  }
+}
+
+module structure() {
+  beam_pair();
+
+  rotate([90, 0, 90])
+    beam_pair();
+
+  rotate([0, 90, 90])
+    beam_pair();
+}
+
+structure();
