@@ -10,7 +10,7 @@ chamfer = 1.5;
 
 // Contour
 contour_width = 1.5;
-contour_tolerance = 0.1;
+contour_tolerance = 0.15;
 contour_height = 3;
 
 // Perforations
