@@ -27,8 +27,9 @@ stand_offset = 15;
 stand_joint_width = 10;
 
 holder_wall = 1;
-holder_tolerance = 0.1;
+holder_tolerance = 0.05;
 holder_height = 5;
+holder_hole_radius = 1.5;
 
 assert(holder_height < hole_offset);
 
@@ -254,12 +255,12 @@ module holder_support() {
 }
 
 module holder() {
-  dy = (beam_side + 2 * (holder_wall + holder_tolerance)) * sqrt(2);
+  support_width = (beam_side + 2 * (holder_wall + holder_tolerance)) * sqrt(2);
 
   difference() {
     linear_extrude(holder_wall)
       union() {
-        square(size=[side, dy], center=true);
+        square(size=[side, support_width], center=true);
         for (i = [-1:2:1]) {
           translate([i * side / 2, 0])
             rotate([0, 0, 45])
@@ -269,7 +270,7 @@ module holder() {
 
     for (i = [-1:2:1]) {
       translate([i * side / 2, 0, -TINY])
-        cylinder(h=holder_wall + 2 * TINY + 10, r=1, center=false);
+        cylinder(h=holder_wall + 2 * TINY, r=holder_hole_radius, center=false);
     }
   }
 
@@ -359,4 +360,5 @@ module structure() {
 //structure();
 
 //stand();
-holder();
+rotate([0, 0, 90])
+  holder();
