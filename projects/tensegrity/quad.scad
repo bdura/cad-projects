@@ -2,8 +2,8 @@ include <BOSL2/std.scad>
 include <BOSL2/threading.scad>
 include <BOSL2/bottlecaps.scad>
 
-include <../lib/primitives.scad>
-include <../lib/constants.scad>
+include <../../lib/primitives.scad>
+include <../../lib/constants.scad>
 
 $fn = 360;
 
