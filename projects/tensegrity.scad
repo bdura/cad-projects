@@ -27,6 +27,7 @@ stand_offset = 15;
 stand_joint_width = 10;
 
 holder_wall = 1;
+holder_tolerance = 0.1;
 holder_height = 5;
 
 assert(holder_height < hole_offset);
@@ -217,53 +218,60 @@ module guide() {
 module holder_support() {
   dx = beam_side / sqrt(2);
   h = (beam_length - side) / 2;
-  w = holder_wall;
+  w = holder_wall * 2;
 
-  extrusion_height = dx + holder_wall * sqrt(2);
+  extrusion_height = dx + (holder_wall + holder_tolerance) * sqrt(2);
 
-  rotate([90, 0, 0])
-    translate([0, 0, -extrusion_height]) {
-      for (i = [0:1])
-        translate([0, 0, i * (extrusion_height * 2 - w)])
+  for (i = [0:1])
+    mirror([i, 0, 0])
+      rotate([90, 0, 0])
+        translate([0, 0, -extrusion_height]) {
           linear_extrude(w)
             polygon(
               [
-                [-dx, -TINY],
+                [0, -TINY],
                 [dx, -TINY],
                 [dx, h],
                 [0, h - dx],
-                [-dx, h],
               ]
             );
 
-      linear_extrude(extrusion_height * 2)
-        polygon(
-          [
-            [dx, h],
-            [0, h - dx],
-            [-dx, h],
-            [-dx, h - w],
-            [0, h - dx - w],
-            [dx, h - w],
-          ]
-        );
-    }
+          hull() {
+            for (i = [0:1]) {
+              linear_extrude(max(TINY, i * extrusion_height * 2))
+                translate([0, (i - 1) * extrusion_height * 2])
+                  polygon(
+                    [
+                      [dx, h],
+                      [0, h - dx],
+                      [0, h - dx - holder_wall],
+                      [dx, h - holder_wall],
+                    ]
+                  );
+            }
+          }
+        }
 }
 
 module holder() {
-  dy = (beam_side + 2 * holder_wall) * sqrt(2);
+  dy = (beam_side + 2 * (holder_wall + holder_tolerance)) * sqrt(2);
 
-  linear_extrude(holder_wall)
-    difference() {
+  difference() {
+    linear_extrude(holder_wall)
       union() {
         square(size=[side, dy], center=true);
         for (i = [-1:2:1]) {
           translate([i * side / 2, 0])
             rotate([0, 0, 45])
-              square(beam_side + 2 * holder_wall, center=true);
+              square(beam_side + 2 * (holder_wall + holder_tolerance), center=true);
         }
       }
+
+    for (i = [-1:2:1]) {
+      translate([i * side / 2, 0, -TINY])
+        cylinder(h=holder_wall + 2 * TINY + 10, r=1, center=false);
     }
+  }
 
   translate([0, 0, holder_wall])
     linear_extrude(holder_height + holder_wall + TINY) {
@@ -271,8 +279,8 @@ module holder() {
         translate([i * side / 2, 0])
           rotate([0, 0, 45])
             difference() {
-              square(beam_side + 2 * holder_wall, center=true);
-              square(beam_side + TOLERANCE, center=true);
+              square(beam_side + 2 * (holder_wall + holder_tolerance), center=true);
+              square(beam_side + 2 * holder_tolerance, center=true);
             }
       }
     }
@@ -298,17 +306,17 @@ module stand_sketch() {
 }
 
 module stand() {
-  linear_extrude(wall)
+  linear_extrude(holder_wall)
     stand_sketch();
 
-  translate([0, 0, wall - TINY])
+  translate([0, 0, holder_wall - TINY])
     linear_extrude(hole_offset + TINY - 1)
       union() {
         for (i = [-1:2:1]) {
-          translate([i * (side + beam_side) / 2, 0])
+          translate([i * side / 2, 0])
             rotate([0, 0, 45])
               difference() {
-                square(beam_side + 2 * wall, center=true);
+                square(beam_side + 2 * holder_wall, center=true);
                 square(beam_side + TOLERANCE, center=true);
               }
         }
@@ -326,7 +334,7 @@ module beam_pair() {
 module holder_pair() {
   for (i = [0:1])
     mirror([0, 0, i])
-      translate([0, 0, -holder_wall - beam_length / 2])
+      translate([0, 0, -holder_wall - beam_length / 2 - holder_tolerance])
         #holder();
 }
 
@@ -348,4 +356,7 @@ module structure() {
     pair();
 }
 
-structure();
+//structure();
+
+//stand();
+holder();
