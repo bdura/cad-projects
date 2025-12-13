@@ -5,7 +5,7 @@ $fn = 360;
 
 depth = 8.6;
 
-notch_depth = 2;
+notch_depth = 1.5;
 notch_height = 2;
 
 notch_chord = 15;
@@ -15,7 +15,8 @@ notch_circle_offset = 10;
 
 chamfer = 0.8;
 
-to66_inner = 59.2;
+to66_outer = 62.5;
+to82_inner = 82.0;
 
 module notch_sketch(r) {
   polygon(
@@ -55,9 +56,14 @@ module twist_off(outer, notch_radius, n, wall) {
 }
 
 module to66(wall = 1) {
-  outer = to66_inner / 2 + notch_depth + TOLERANCE;
-  twist_off(outer=outer, notch_radius=10, n=4, wall=wall);
+  twist_off(outer=to66_outer / 2, notch_radius=10, n=4, wall=wall);
+}
+
+module to82(wall = 1) {
+  outer = to82_inner / 2 + notch_depth + TOLERANCE;
+  twist_off(outer=outer, notch_radius=10, n=6, wall=wall);
 }
 
 to66();
-cylinder(h=1, r=to66_inner / 2 + notch_depth + TOLERANCE + TINY, center=false);
+translate([0, 0, -1])
+  cylinder(h=1 + TINY, r=to66_outer / 2 + 1, center=false);
