@@ -3,20 +3,17 @@ include <../../lib/constants.scad>
 
 $fn = 360;
 
-depth = 8.6;
+depth = 10;
 
-notch_depth = 1.5;
-notch_height = 2;
+notch_depth = 1.6;
+notch_height = 2.1;
 
 notch_chord = 15;
 
-notch_circle_radius = 12.5;
-notch_circle_offset = 10;
-
 chamfer = 0.8;
 
-to66_outer = 62.5;
-to82_inner = 82.0;
+to66_outer = 63.0;
+to82_outer = 81.0;
 
 module notch_sketch(r) {
   polygon(
@@ -36,7 +33,7 @@ module notch(outer, notch_radius) {
       rotate_extrude()
         notch_sketch(r=outer);
 
-    translate([outer + notch_radius - notch_depth, 0, 0])
+    translate([outer + notch_radius - 1.2 * notch_depth, 0, 0])
       cylinder(h=notch_height, r=notch_radius, center=false);
   }
 }
@@ -60,10 +57,13 @@ module to66(wall = 1) {
 }
 
 module to82(wall = 1) {
-  outer = to82_inner / 2 + notch_depth + TOLERANCE;
-  twist_off(outer=outer, notch_radius=10, n=6, wall=wall);
+  twist_off(outer=to82_outer / 2, notch_radius=10, n=6, wall=wall);
 }
 
-to66();
+to82(1.5);
 translate([0, 0, -1])
-  cylinder(h=1 + TINY, r=to66_outer / 2 + 1, center=false);
+  linear_extrude(1 + TINY)
+    difference() {
+      circle(r=to82_outer / 2 + 1.5);
+      circle(r=to82_outer / 2 - 8);
+    }
