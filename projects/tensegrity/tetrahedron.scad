@@ -5,17 +5,17 @@ $fn = 360;
 
 beam_length = 300;
 beam_radius = 5;
-beam_offset = 10;
-beam_tolerance = TOLERANCE;
+beam_offset = 15;
+beam_tolerance = 0.05;
 
-wall = 2.5;
-rope_diameter = 2;
-chamfer = 0.3;
+wall = 1.5;
+rope_diameter = 2.5;
+chamfer = 0.4;
 
-lock_top = 2;
-lock_bottom = 20;
+lock_top = 7;
+lock_bottom = 24;
 attachment_height = 2;
-attachment_offset = 7;
+attachment_offset = 8;
 
 module beam(tolerance = 0) {
   translate([0, 0, beam_offset])
@@ -87,8 +87,8 @@ module lock() {
 }
 
 module attachment() {
-  clearance = 1.5 * rope_diameter;
-  d1 = 3 * rope_diameter + 2 * attachment_height;
+  clearance = 2 * rope_diameter;
+  d1 = 3.5 * rope_diameter + 2 * attachment_height;
   d2 = 2 * rope_diameter + attachment_height;
 
   difference() {
