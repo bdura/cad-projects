@@ -59,11 +59,3 @@ module to66(wall = 1) {
 module to82(wall = 1) {
   twist_off(outer=to82_outer / 2, notch_radius=10, n=6, wall=wall);
 }
-
-//// to82(1.5);
-//translate([0, 0, -1])
-//  linear_extrude(1 + TINY)
-//    difference() {
-//      circle(r=to82_outer / 2 + 1.5);
-//      circle(r=to82_outer / 2 - 8);
-////     }

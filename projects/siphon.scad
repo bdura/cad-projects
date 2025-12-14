@@ -3,16 +3,14 @@ include <BOSL2/threading.scad>
 
 include <../lib/primitives.scad>
 include <../lib/constants.scad>
+include <./lids/twist_off.scad>
 
 $fn = 360;
 
-cap_diameter = 77.8;
-cap_width = 6;
-cap_height = 12;
-cap_pitch = 3.9;
-thread_depth = 2;
+cap_diameter = to82_outer;
+cap_width = 5;
 
-main_tube_width = 6;
+main_tube_width = 5;
 main_tube_height = 50;
 
 inner_ring_radius = 16.5;
@@ -42,24 +40,7 @@ main_tube_radius = cap_diameter / 2 - main_tube_width;
 ledge_width = cap_width + main_tube_width;
 
 module cap() {
-  inner = cap_diameter / 2;
-  outer = inner + cap_width;
-
-  linear_extrude(height=cap_height)
-    ring(inner, outer);
-
-  threading_height = cap_height - cap_pitch;
-
-  translate(v=[0, 0, cap_height / 2])
-    thread_helix(
-      d=(inner - thread_depth + TINY) * 2,
-      turns=threading_height / cap_pitch / 6,
-      pitch=cap_pitch,
-      starts=6,
-      thread_depth=thread_depth,
-      internal=true,
-      lead_in=2
-    );
+  to82(cap_width);
 }
 
 module ledge() {
@@ -360,6 +341,8 @@ module untrigger() {
 
 siphon();
 
-rotate([0, 0, 180 * (1 + 1 / n_feet / 2)])
-  color(c="red")
-    untrigger();
+for (i = [0:2])
+  rotate([0, 0, 180 * (1 + (2 * i + 1) / n_feet)])
+    translate([20, 0, 0])
+      color(c="red")
+        untrigger();
