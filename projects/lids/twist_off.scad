@@ -5,15 +5,15 @@ $fn = 360;
 
 depth = 10;
 
-notch_depth = 1.6;
-notch_height = 2.1;
+notch_depth = 2.2;
+notch_height = 3;
 
-notch_chord = 15;
+notch_chord = 17;
 
-chamfer = 0.8;
+chamfer = 1;
 
-to66_outer = 63.0;
-to82_outer = 81.0;
+to66_outer = 63.6;
+to82_outer = 81.6;
 
 module notch_sketch(r) {
   polygon(
@@ -33,7 +33,7 @@ module notch(outer, notch_radius) {
       rotate_extrude()
         notch_sketch(r=outer);
 
-    translate([outer + notch_radius - 1.2 * notch_depth, 0, 0])
+    translate([outer + notch_radius - 1.0 * notch_depth, 0, 0])
       cylinder(h=notch_height, r=notch_radius, center=false);
   }
 }
