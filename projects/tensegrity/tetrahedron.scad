@@ -17,6 +17,11 @@ lock_bottom = 22;
 attachment_height = 2;
 attachment_offset = 6.5;
 
+stand_radius = 100;
+stand_leg_width = 10;
+stand_leg_offset = 5;
+stand_height = 3;
+
 module beam(tolerance = 0) {
   translate([0, 0, beam_offset])
     cylinder(h=beam_length, r=beam_radius + tolerance, center=false);
@@ -110,21 +115,69 @@ module attachment() {
   }
 }
 
-difference() {
-  lock();
+module vertex() {
+  difference() {
+    lock();
 
-  attachment();
+    attachment();
 
-  // complementary angle between face and the z-axis
-  tan_angle = 1 / 2 / sqrt(2);
-  angle = atan(tan_angle);
+    // complementary angle between face and the z-axis
+    tan_angle = 1 / 2 / sqrt(2);
+    angle = atan(tan_angle);
 
-  d = lock_bottom * tan_angle + (beam_radius + beam_tolerance + wall) / cos(angle);
+    d = lock_bottom * tan_angle + (beam_radius + beam_tolerance + wall) / cos(angle);
 
+    for (i = [0:2])
+      rotate([0, 0, i * 120])
+        translate([-attachment_offset * tan_angle, 0, attachment_offset])
+          translate([d, 0, 0])
+            rotate([0, -90 - angle, 0])
+              attachment();
+  }
+}
+
+module stand_sketch() {
+  projection(cut=false)
+    vertex();
+}
+
+module stand_leg_sketch() {
   for (i = [0:2])
     rotate([0, 0, i * 120])
-      translate([-attachment_offset * tan_angle, 0, attachment_offset])
-        translate([d, 0, 0])
-          rotate([0, -90 - angle, 0])
-            attachment();
+      translate([0, -stand_leg_width / 2])
+        square(size=[stand_radius, stand_leg_width], center=false);
 }
+
+module stand_full() {
+  h = lock_bottom - lock_top;
+
+  linear_extrude(stand_height)
+    offset(stand_leg_offset)
+      stand_leg_sketch();
+
+  hull()
+    union() {
+      translate([0, 0, h - 3 * TINY])
+        linear_extrude(TINY)
+          offset(wall)
+            stand_sketch();
+
+      linear_extrude(TINY)
+        offset(wall + h / 2)
+          stand_sketch();
+    }
+}
+
+module stand() {
+  h = lock_bottom - lock_top;
+
+  difference() {
+    stand_full();
+
+    translate([0, 0, h - TINY])
+      mirror([0, 0, 1])
+        hull() vertex();
+  }
+}
+
+stand();
