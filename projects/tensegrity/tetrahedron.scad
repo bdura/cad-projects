@@ -6,16 +6,16 @@ $fn = 360;
 beam_length = 300;
 beam_radius = 5;
 beam_offset = 15;
-beam_tolerance = 0.05;
+beam_tolerance = 0.0;
 
 wall = 1.5;
 rope_diameter = 2.5;
 chamfer = 0.4;
 
-lock_top = 7;
-lock_bottom = 24;
+lock_top = 9;
+lock_bottom = 22;
 attachment_height = 2;
-attachment_offset = 8;
+attachment_offset = 6.5;
 
 module beam(tolerance = 0) {
   translate([0, 0, beam_offset])
@@ -126,5 +126,5 @@ difference() {
       translate([-attachment_offset * tan_angle, 0, attachment_offset])
         translate([d, 0, 0])
           rotate([0, -90 - angle, 0])
-            #attachment();
+            attachment();
 }
