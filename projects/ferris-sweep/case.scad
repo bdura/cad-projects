@@ -10,7 +10,7 @@ chamfer = 1.5;
 
 // Contour
 contour_width = 1.5;
-contour_tolerance = 0.15;
+contour_tolerance = 0.5;
 contour_height = 3;
 
 // Perforations
@@ -137,8 +137,16 @@ module bumper_test() {
   }
 }
 
-translate([2, 0, 0])
-  case("left");
+difference() {
+  union() {
+    linear_extrude(2.4 + TINY)
+      body("left");
 
-translate([-2, 0, 0])
-  case("right");
+    translate([0, 0, 2.4])for (quadrant = ["east", "north", "west", "south"])
+      individual_tent(hand="left", quadrant=quadrant) cylinder(h=1.5, r1=3, r2=1.5, center=false);
+  }
+
+  #magnet_perforations("left");
+  bumps_perforations("left");
+}
+contour("left");
