@@ -5,26 +5,38 @@ use <./elements.scad>;
 
 $fn = 360;
 
-thickness = 3;
+minimum_wall = 1;
+
+thickness = 2.5;
+tenting_clearance = 1.5;
 chamfer = 1.5;
+
+assert(thickness > chamfer);
+
+// Tenting screws
+screw_hole_diameter = 2.9;
+screw_hole_depth = 3.5;
+screw_hole_wall = 1.0;
+
+assert(screw_hole_depth < thickness + tenting_clearance);
 
 // Contour
 contour_width = 1.5;
 contour_tolerance = 0.5;
-contour_height = 3;
-
-// Perforations
-perforation_depth = 1;
-special_perforation_offset = 0.4;
+contour_height = 3.5;
 
 // Magnets
 magnet_wall = 0.4;
 magnet_height = 2;
 magnet_tolerance = 0.05;
 
+assert(magnet_wall + magnet_height < thickness);
+
 // Bumpers
 bumper_height = 2.6;
 bumper_depth = (bumper_height) / 2 + TOLERANCE;
+
+assert(bumper_depth < thickness - minimum_wall);
 
 module body_with_contour(hand) {
   offset(contour_width + contour_tolerance)
@@ -54,25 +66,20 @@ module contour(hand) {
       }
 }
 
-module perforated(hand) {
-  difference() {
-    union() {
-      translate([0, 0, chamfer])
-        linear_extrude(thickness - chamfer)
-          body_with_contour(hand);
+module base(hand) {
+  top_radius = screw_hole_diameter / 2 + screw_hole_wall;
+  bottom_radius = top_radius + screw_hole_wall;
 
-      chamfered_base(hand);
-    }
+  translate([0, 0, chamfer - TINY])
+    linear_extrude(thickness - chamfer + 2 * TINY)
+      body_with_contour(hand);
 
-    translate(v=[0, 0, thickness - perforation_depth])
-      linear_extrude(perforation_depth + TINY)
-        union() {
-          perforations(hand);
+  chamfered_base(hand);
 
-          offset(special_perforation_offset)
-            special_perforations(hand);
-        }
-  }
+  for (quadrant = ["east", "north", "west", "south"])
+    translate([0, 0, thickness - TINY])
+      individual_tent(hand=hand, quadrant=quadrant)
+        cylinder(h=tenting_clearance + TINY, r1=bottom_radius, r2=top_radius);
 }
 
 module magnet_perforations(hand) {
@@ -87,6 +94,13 @@ module magnet_perforations(hand) {
         magnets(hand);
 }
 
+module screw_perforations(hand) {
+  for (quadrant = ["east", "north", "west", "south"])
+    translate([0, 0, thickness + tenting_clearance - screw_hole_depth])
+      individual_tent(hand=hand, quadrant=quadrant)
+        cylinder(h=screw_hole_depth + TINY, r=screw_hole_diameter / 2);
+}
+
 module bumps_perforations(hand) {
   translate(v=[0, 0, -TINY])
     linear_extrude(bumper_depth + TINY)
@@ -99,54 +113,11 @@ module case(hand) {
       contour(hand);
 
   difference() {
-    perforated(hand);
+    base(hand);
+    screw_perforations(hand);
     magnet_perforations(hand);
     bumps_perforations(hand);
   }
 }
 
-module magnet_test() {
-  difference() {
-    linear_extrude(thickness)
-      offset(2)
-        square(size=10, center=true);
-
-    translate(v=[0, 0, magnet_wall])
-      linear_extrude(thickness)
-        offset(magnet_tolerance)
-          circle(3);
-
-    translate(v=[0, 0, -TINY])
-      linear_extrude(thickness)
-        offset(-2)
-          circle(3);
-  }
-}
-
-module bumper_test() {
-  difference() {
-    linear_extrude(thickness)
-      offset(2)
-        square([20, 10], center=true);
-
-    for (i = [0:1]) {
-      translate(v=[(-1 + i * 2) * 5.5, 0, -TINY])
-        linear_extrude(bumper_depth + TINY)
-          circle(4);
-    }
-  }
-}
-
-difference() {
-  union() {
-    linear_extrude(2.4 + TINY)
-      body("left");
-
-    translate([0, 0, 2.4])for (quadrant = ["east", "north", "west", "south"])
-      individual_tent(hand="left", quadrant=quadrant) cylinder(h=1.5, r1=3, r2=1.5, center=false);
-  }
-
-  #magnet_perforations("left");
-  bumps_perforations("left");
-}
-contour("left");
+case("left");
