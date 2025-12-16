@@ -7,8 +7,8 @@ $fn = 360;
 
 minimum_wall = 1;
 
-thickness = 2.5;
-tenting_clearance = 1.5;
+thickness = 3;
+tenting_clearance = 1.7;
 chamfer = 1.5;
 
 assert(thickness > chamfer);
@@ -22,8 +22,8 @@ assert(screw_hole_depth < thickness + tenting_clearance);
 
 // Contour
 contour_width = 1.5;
-contour_tolerance = 0.5;
-contour_height = 3.5;
+contour_tolerance = 0.6;
+contour_overheight = 2.2;
 
 // Magnets
 magnet_wall = 0.4;
@@ -109,7 +109,7 @@ module bumps_perforations(hand) {
 
 module case(hand) {
   translate([0, 0, chamfer])
-    linear_extrude(thickness + contour_height - chamfer)
+    linear_extrude(thickness + tenting_clearance + contour_overheight - chamfer)
       contour(hand);
 
   difference() {
@@ -120,4 +120,7 @@ module case(hand) {
   }
 }
 
-case("left");
+translate([2, 0, 0])
+  case("left");
+translate([-2, 0, 0])
+  case("right");
