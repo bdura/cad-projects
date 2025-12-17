@@ -89,8 +89,10 @@ module handle() {
 }
 
 module key() {
-  shape();
-  attachement();
+  translate([-1, 0, 0]) {
+    shape();
+    attachement();
+  }
   handle();
 }
 
