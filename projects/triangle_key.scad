@@ -10,14 +10,14 @@ include <../lib/constants.scad>
 $fn = 360;
 
 // Wall size
-wall = 1.5;
+wall = 2;
 
 // Key shape
 shape_side = 9;
 shape_offset = 0.6;
 
 shape_radius = shape_side / sqrt(3) + TOLERANCE;
-shape_depth = 10;
+shape_depth = 12;
 
 // Handle
 handle_thickness = 3;
@@ -37,7 +37,8 @@ module inner_shape_sketch() {
 
 module shape_sketch() {
   difference() {
-    circle(shape_radius + wall + shape_offset);
+    offset(wall)
+      inner_shape_sketch();
     inner_shape_sketch();
   }
   ;
