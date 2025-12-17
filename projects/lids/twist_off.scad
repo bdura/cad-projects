@@ -13,7 +13,7 @@ notch_chord = 17;
 chamfer = 1;
 
 to66_outer = 63.6;
-to82_outer = 81.6;
+to82_outer = 82.0;
 
 module notch_sketch(r) {
   polygon(
