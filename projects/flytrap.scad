@@ -4,6 +4,7 @@ include <BOSL2/bottlecaps.scad>
 
 include <../lib/primitives.scad>
 include <../lib/constants.scad>
+include <./lids/twist_off.scad>
 
 $fn = 360;
 
@@ -22,10 +23,6 @@ cap_height = 11;
 cap_top_width = jar_threading_depth + jar_width + 1;
 cap_top_wall = 1.5;
 
-// Threading
-thread_pitch = 4;
-thread_depth = 2;
-
 // Cone
 cone_height = 40;
 cone_opening_diameter = 3;
@@ -37,19 +34,11 @@ cone_hole_n_by_line = 10;
 cone_hole_ratio = 0.8;
 
 module cap() {
-  inner = cap_inner_diameter / 2;
+
+  inner = to66_outer / 2;
   outer = inner + cap_width;
 
-  linear_extrude(cap_height)
-    ring(inner, outer);
-
-  translate([0, 0, cap_height - wall])
-    linear_extrude(wall)
-      difference() {
-        circle(outer);
-        square(2 * (inner - thread_depth - TOLERANCE), center=true);
-      }
-  ;
+  to66(cap_width);
 
   linear_extrude(cap_top_wall)
     ring(inner - cap_top_width, outer);
