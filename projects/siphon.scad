@@ -3,16 +3,14 @@ include <BOSL2/threading.scad>
 
 include <../lib/primitives.scad>
 include <../lib/constants.scad>
+include <./lids/twist_off.scad>
 
 $fn = 360;
 
-cap_diameter = 77.8;
-cap_width = 3;
-cap_height = 12;
-cap_pitch = 3.9;
-thread_depth = 2;
+cap_diameter = to82_outer;
+cap_width = 5;
 
-main_tube_width = 6;
+main_tube_width = 5;
 main_tube_height = 50;
 
 inner_ring_radius = 16.5;
@@ -42,24 +40,7 @@ main_tube_radius = cap_diameter / 2 - main_tube_width;
 ledge_width = cap_width + main_tube_width;
 
 module cap() {
-  inner = cap_diameter / 2 + thread_depth;
-  outer = inner + cap_width;
-
-  translate([0, 0, thread_depth]) {
-    linear_extrude(height=cap_height)
-      ring(inner, outer);
-
-    translate([0, 0, cap_height - thread_depth])
-      linear_extrude(thread_depth)
-        difference() {
-          circle(outer);
-          square(2 * (inner - thread_depth + TOLERANCE), center=true);
-        }
-    ;
-  }
-
-  linear_extrude(thread_depth + TINY)
-    ring(inner=inner - 7, outer=outer);
+  to82(cap_width);
 }
 
 module ledge() {
@@ -342,7 +323,7 @@ module untrigger_outer_chamfer() {
 }
 
 module untrigger() {
-  theta = 180 / n_feet / 2;
+  theta = 180 / n_feet;
   width = untrigger_tube_outer_radius + untrigger_wall;
 
   difference() {
@@ -358,8 +339,10 @@ module untrigger() {
   }
 }
 
-cap();
+siphon();
 
-//rotate([0, 0, 180 * (1 + 1 / n_feet / 2)])
-//color(c = "red")
-//untrigger();
+for (i = [0:2])
+  rotate([0, 0, 180 * (1 + (2 * i + 1) / n_feet)])
+    translate([20, 0, 0])
+      color(c="red")
+        untrigger();
