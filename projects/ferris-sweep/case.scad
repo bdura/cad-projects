@@ -8,7 +8,7 @@ $fn = 360;
 minimum_wall = 1;
 
 thickness = 3;
-tenting_clearance = 1.7;
+tenting_clearance = 2.0;
 chamfer = 1.5;
 
 assert(thickness > chamfer);
