@@ -13,10 +13,10 @@ cap_width = 5;
 main_tube_width = 5;
 main_tube_height = 50;
 
-inner_ring_radius = 16.5;
+inner_ring_radius = 20.2;
 inner_ring_width = 3;
 inner_ring_chamfer = 1.5;
-inner_ring_height = 20;
+inner_ring_height = 25;
 
 ring_support_width = 3;
 n_ring_supports = 3;
@@ -341,8 +341,8 @@ module untrigger() {
 
 siphon();
 
-for (i = [0:2])
-  rotate([0, 0, 180 * (1 + (2 * i + 1) / n_feet)])
-    translate([20, 0, 0])
-      color(c="red")
-        untrigger();
+// for (i = [0:2])
+//   rotate([0, 0, 180 * (1 + (2 * i + 1) / n_feet)])
+//     translate([20, 0, 0])
+//       color(c="red")
+//         untrigger();
